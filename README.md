@@ -1,5 +1,7 @@
 # NvER_plotter_django
-django-based NvER_plotter
+django-based NvER_plotter  
+
+## Note: This is the current development fork for this project! Please no longer use vincentGuerlais/NvER_plotter_django as version is deprecated!
 
 NvERTx - A comparative embryogenesis & regeneration temporal gene expression plotter
 Understanding the relationship between embryogenesis and regeneration is a long lasting question in regenerative biology as both developmental strategies lead to fully functional organisms. Modern functional genomics enables us today to re-address this question using integrative approaches that enable us to identify the similarities as well as importantly the regeneration specific elements that are potential candidates for regenerative medicine.
