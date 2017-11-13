@@ -1185,7 +1185,8 @@ def results(request):
     	tempout = tempfile.NamedTemporaryFile()
     	tempin.seek(0)
     	#tempin.read()
-    	os.system("/srv/www/htdocs/ER/NvER_plotter_django/nemVec_ER/muscle3.8.31 -in " + tempin.name + " -out " + tempout.name +" -html -quiet")
+    	wd = os.path.dirname(os.path.realpath('muscle3.8.31'))
+    	os.system(wd + "/muscle3.8.31 -in " + tempin.name + " -out " + tempout.name +" -html -quiet")
     	#close and remove file
     	tempout.seek(0)
     	out = tempout.read()

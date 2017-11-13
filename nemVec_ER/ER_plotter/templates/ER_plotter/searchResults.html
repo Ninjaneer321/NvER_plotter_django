@@ -33,9 +33,9 @@
               <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ id.nvertx_id }}">{{ id.nvertx_id }}</td>
               <td>{{ id.Nemve1_tophit }}</td>
               <td>{{ id.Nemve1_e_val }}</td>
-              <td>{% if id.Uniprot_ID == 'No_Uniprotmatch' %}{{ Uniprot_ID }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.Uniprot_ID }}">{{ id.Uniprot_ID }}</a>{% endif %}</td>
+              <td>{% if id.Uniprot_ID == 'No_Uniprotmatch' %}{{ Uniprot_ID }}{% else %}<a href="http://www.uniprot.org/uniprot/{{ id.Uniprot_ID }}" target="_blank">{{ id.Uniprot_ID }}</a>{% endif %}</td>
               <td>{{ id.Uniprot_Description }}</td>
-              <td>{% if id.ncbi_link %}{{ id.ncbi_wo_link_beg }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ id.ncbi_link }}">{{ id.ncbi_link }}</a>|{{ id.ncbi_wo_link_end }}{% else %}None{% endif %}</td>
+              <td>{% if id.ncbi_link %}{{ id.ncbi_wo_link_beg }}|<a href="https://www.ncbi.nlm.nih.gov/protein/{{ id.ncbi_link }}" target="_blank">{{ id.ncbi_link }}</a>|{{ id.ncbi_wo_link_end }}{% else %}None{% endif %}</td>
             </tr>
             <tr class="hidden_row">
               <td colspan="1" >other nr_hits</td>
