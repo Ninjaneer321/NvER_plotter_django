@@ -89,22 +89,22 @@ def results(request):
 				regen_96_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_96HPA+1,2),2)
 				regen_120_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_120HPA+1,2),2)
 				regen_144_1 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_144HPA+1,2),2)
-				regen_se_UC_1 = [round(regen_UC_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_UC,2),round(regen_UC_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_UC,2)]
-				regen_se_0_1 = [round(regen_0_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_0HPA,2),round(regen_0_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_0HPA,2)]
-				regen_se_2_1 = [round(regen_2_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_2HPA,2),round(regen_2_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_2HPA,2)]
-				regen_se_4_1 = [round(regen_4_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_4HPA,2),round(regen_4_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_4HPA,2)]
-				regen_se_8_1 = [round(regen_8_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_8HPA,2),round(regen_8_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_8HPA,2)]
-				regen_se_12_1 = [round(regen_12_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_12HPA,2),round(regen_12_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_12HPA,2)]
-				regen_se_16_1 = [round(regen_16_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_16HPA,2),round(regen_16_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_16HPA,2)]
-				regen_se_20_1 = [round(regen_20_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_20HPA,2),round(regen_20_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_20HPA,2)]
-				regen_se_24_1 = [round(regen_24_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_24HPA,2),round(regen_24_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_24HPA,2)]
-				regen_se_36_1 = [round(regen_36_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_36HPA,2),round(regen_36_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_36HPA,2)]
-				regen_se_48_1 = [round(regen_48_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_48HPA,2),round(regen_48_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_48HPA,2)]
-				regen_se_60_1 = [round(regen_60_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_60HPA,2),round(regen_60_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_60HPA,2)]
-				regen_se_72_1 = [round(regen_72_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_72HPA,2),round(regen_72_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_72HPA,2)]
-				regen_se_96_1 = [round(regen_96_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_96HPA,2),round(regen_96_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_96HPA,2)]
-				regen_se_120_1 = [round(regen_120_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_120HPA,2),round(regen_120_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_120HPA,2)]
-				regen_se_144_1 = [round(regen_144_1 - Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_144HPA,2),round(regen_144_1 + Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_144HPA,2)]
+				regen_se_UC_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_UC,2)
+				regen_se_0_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_0HPA,2)
+				regen_se_2_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_2HPA,2)
+				regen_se_4_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_4HPA,2)
+				regen_se_8_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_8HPA,2)
+				regen_se_12_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_12HPA,2)
+				regen_se_16_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_16HPA,2)
+				regen_se_20_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_20HPA,2)
+				regen_se_24_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_24HPA,2)
+				regen_se_36_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_36HPA,2)
+				regen_se_48_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_48HPA,2)
+				regen_se_60_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_60HPA,2)
+				regen_se_72_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_72HPA,2)
+				regen_se_96_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_96HPA,2)
+				regen_se_120_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_120HPA,2)
+				regen_se_144_1 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_1).regen_log_se_144HPA,2)
 			else :
 				regen_UC_1 = round(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_UC,2)
 				regen_0_1 = round(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_0HPA,2)
@@ -122,22 +122,22 @@ def results(request):
 				regen_96_1 = round(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_96HPA,2)
 				regen_120_1 = round(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_120HPA,2)
 				regen_144_1 = round(Regen_cpm.objects.get(nvertx_id=nvertx_1).regen_anc_144HPA,2)
-				regen_se_UC_1 = [round(regen_UC_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_UC,2),round(regen_UC_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_UC,2)]
-				regen_se_0_1 = [round(regen_0_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_0HPA,2),round(regen_0_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_0HPA,2)]
-				regen_se_2_1 = [round(regen_2_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_2HPA,2),round(regen_2_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_2HPA,2)]
-				regen_se_4_1 = [round(regen_4_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_4HPA,2),round(regen_4_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_4HPA,2)]
-				regen_se_8_1 = [round(regen_8_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_8HPA,2),round(regen_8_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_8HPA,2)]
-				regen_se_12_1 = [round(regen_12_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_12HPA,2),round(regen_12_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_12HPA,2)]
-				regen_se_16_1 = [round(regen_16_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_16HPA,2),round(regen_16_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_16HPA,2)]
-				regen_se_20_1 = [round(regen_20_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_20HPA,2),round(regen_20_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_20HPA,2)]
-				regen_se_24_1 = [round(regen_24_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_24HPA,2),round(regen_24_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_24HPA,2)]
-				regen_se_36_1 = [round(regen_36_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_36HPA,2),round(regen_36_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_36HPA,2)]
-				regen_se_48_1 = [round(regen_48_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_48HPA,2),round(regen_48_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_48HPA,2)]
-				regen_se_60_1 = [round(regen_60_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_60HPA,2),round(regen_60_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_60HPA,2)]
-				regen_se_72_1 = [round(regen_72_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_72HPA,2),round(regen_72_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_72HPA,2)]
-				regen_se_96_1 = [round(regen_96_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_96HPA,2),round(regen_96_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_96HPA,2)]
-				regen_se_120_1 = [round(regen_120_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_120HPA,2),round(regen_120_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_120HPA,2)]
-				regen_se_144_1 = [round(regen_144_1 - Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_144HPA,2),round(regen_144_1 + Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_144HPA,2)]
+				regen_se_UC_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_UC,2)
+				regen_se_0_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_0HPA,2)
+				regen_se_2_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_2HPA,2)
+				regen_se_4_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_4HPA,2)
+				regen_se_8_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_8HPA,2)
+				regen_se_12_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_12HPA,2)
+				regen_se_16_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_16HPA,2)
+				regen_se_20_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_20HPA,2)
+				regen_se_24_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_24HPA,2)
+				regen_se_36_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_36HPA,2)
+				regen_se_48_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_48HPA,2)
+				regen_se_60_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_60HPA,2)
+				regen_se_72_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_72HPA,2)
+				regen_se_96_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_96HPA,2)
+				regen_se_120_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_120HPA,2)
+				regen_se_144_1 = round(Regen_SE.objects.get(nvertx_id=nvertx_1).regen_se_144HPA,2)
 		except :
 			nvertx_1_regen_invalid = True
 		try :
@@ -149,14 +149,14 @@ def results(request):
 			embryo_warner_144_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_144HPF,2)
 			embryo_warner_168_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_168HPF,2)
 			embryo_warner_192_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).warner_anc_192HPF,2)
-			embryo_warner_se_24_1 = [round(embryo_warner_24_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_24HPF,2),round(embryo_warner_24_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_24HPF,2)]
-			embryo_warner_se_48_1 = [round(embryo_warner_48_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_48HPF,2),round(embryo_warner_48_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_48HPF,2)]
-			embryo_warner_se_72_1 = [round(embryo_warner_72_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_72HPF,2),round(embryo_warner_72_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_72HPF,2)]
-			embryo_warner_se_96_1 = [round(embryo_warner_96_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_96HPF,2),round(embryo_warner_96_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_96HPF,2)]
-			embryo_warner_se_120_1 = [round(embryo_warner_120_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_120HPF,2),round(embryo_warner_120_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_120HPF,2)]
-			embryo_warner_se_144_1 = [round(embryo_warner_144_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_144HPF,2),round(embryo_warner_144_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_144HPF,2)]
-			embryo_warner_se_168_1 = [round(embryo_warner_168_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_168HPF,2),round(embryo_warner_168_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_168HPF,2)]
-			embryo_warner_se_192_1 = [round(embryo_warner_192_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_192HPF,2),round(embryo_warner_192_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_192HPF,2)]
+			embryo_warner_se_24_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_24HPF,2)
+			embryo_warner_se_48_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_48HPF,2)
+			embryo_warner_se_72_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_72HPF,2)
+			embryo_warner_se_96_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_96HPF,2)
+			embryo_warner_se_120_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_120HPF,2)
+			embryo_warner_se_144_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_144HPF,2)
+			embryo_warner_se_168_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_168HPF,2)
+			embryo_warner_se_192_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).warner_se_192HPF,2)
 		except :
 			nvertx_1_embryo_warner_invalid = True
 		try :
@@ -180,26 +180,26 @@ def results(request):
 			embryo_fischer_17_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_17HPF,2)
 			embryo_fischer_18_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_18HPF,2)
 			embryo_fischer_19_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).fischer_anc_19HPF,2)
-			embryo_fischer_se_0_1 = [round(embryo_fischer_0_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_0HPF,2),round(embryo_fischer_0_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_0HPF,2)]
-			embryo_fischer_se_1_1 = [round(embryo_fischer_1_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_1HPF,2),round(embryo_fischer_1_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_1HPF,2)]
-			embryo_fischer_se_2_1 = [round(embryo_fischer_2_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_2HPF,2),round(embryo_fischer_2_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_2HPF,2)]
-			embryo_fischer_se_3_1 = [round(embryo_fischer_3_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_3HPF,2),round(embryo_fischer_3_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_3HPF,2)]
-			embryo_fischer_se_4_1 = [round(embryo_fischer_4_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_4HPF,2),round(embryo_fischer_4_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_4HPF,2)]
-			embryo_fischer_se_5_1 = [round(embryo_fischer_5_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_5HPF,2),round(embryo_fischer_5_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_5HPF,2)]
-			embryo_fischer_se_6_1 = [round(embryo_fischer_6_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_6HPF,2),round(embryo_fischer_6_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_6HPF,2)]
-			embryo_fischer_se_7_1 = [round(embryo_fischer_7_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_7HPF,2),round(embryo_fischer_7_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_7HPF,2)]
-			embryo_fischer_se_8_1 = [round(embryo_fischer_8_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_8HPF,2),round(embryo_fischer_8_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_8HPF,2)]
-			embryo_fischer_se_9_1 = [round(embryo_fischer_9_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_9HPF,2),round(embryo_fischer_9_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_9HPF,2)]
+			embryo_fischer_se_0_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_0HPF,2)
+			embryo_fischer_se_1_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_1HPF,2)
+			embryo_fischer_se_2_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_2HPF,2)
+			embryo_fischer_se_3_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_3HPF,2)
+			embryo_fischer_se_4_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_4HPF,2)
+			embryo_fischer_se_5_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_5HPF,2)
+			embryo_fischer_se_6_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_6HPF,2)
+			embryo_fischer_se_7_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_7HPF,2)
+			embryo_fischer_se_8_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_8HPF,2)
+			embryo_fischer_se_9_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_9HPF,2)
 			#embryo_fischer_se_10_1 = [round(embryo_fischer_10_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2),round(embryo_fischer_10_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2)]
-			embryo_fischer_se_11_1 = [round(embryo_fischer_11_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_11HPF,2),round(embryo_fischer_11_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_11HPF,2)]
-			embryo_fischer_se_12_1 = [round(embryo_fischer_12_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_12HPF,2),round(embryo_fischer_12_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_12HPF,2)]
-			embryo_fischer_se_13_1 = [round(embryo_fischer_13_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_13HPF,2),round(embryo_fischer_13_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_13HPF,2)]
-			embryo_fischer_se_14_1 = [round(embryo_fischer_14_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_14HPF,2),round(embryo_fischer_14_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_14HPF,2)]
-			embryo_fischer_se_15_1 = [round(embryo_fischer_15_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_15HPF,2),round(embryo_fischer_15_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_15HPF,2)]
-			embryo_fischer_se_16_1 = [round(embryo_fischer_16_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_16HPF,2),round(embryo_fischer_16_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_16HPF,2)]
-			embryo_fischer_se_17_1 = [round(embryo_fischer_17_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_17HPF,2),round(embryo_fischer_17_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_17HPF,2)]
-			embryo_fischer_se_18_1 = [round(embryo_fischer_18_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_18HPF,2),round(embryo_fischer_18_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_18HPF,2)]
-			embryo_fischer_se_19_1 = [round(embryo_fischer_19_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_19HPF,2),round(embryo_fischer_19_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_19HPF,2)]	
+			embryo_fischer_se_11_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_11HPF,2)
+			embryo_fischer_se_12_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_12HPF,2)
+			embryo_fischer_se_13_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_13HPF,2)
+			embryo_fischer_se_14_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_14HPF,2)
+			embryo_fischer_se_15_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_15HPF,2)
+			embryo_fischer_se_16_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_16HPF,2)
+			embryo_fischer_se_17_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_17HPF,2)
+			embryo_fischer_se_18_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_18HPF,2)
+			embryo_fischer_se_19_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_19HPF,2)
 		except :
 			nvertx_1_embryo_fischer_invalid = True
 		try :
@@ -209,12 +209,12 @@ def results(request):
 			embryo_helm_24_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_24HPF,2)
 			embryo_helm_120_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_120HPF,2)
 			embryo_helm_240_1 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_1).helm_anc_240HPF,2)
-			embryo_helm_se_2_1 = [round(embryo_helm_2_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_2HPF,2),round(embryo_helm_2_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_2HPF,2)]
-			embryo_helm_se_7_1 = [round(embryo_helm_7_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_7HPF,2),round(embryo_helm_7_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_7HPF,2)]
-			embryo_helm_se_12_1 = [round(embryo_helm_12_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_12HPF,2),round(embryo_helm_12_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_12HPF,2)]
-			embryo_helm_se_24_1 = [round(embryo_helm_24_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_24HPF,2),round(embryo_helm_24_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_24HPF,2)]
-			embryo_helm_se_120_1 = [round(embryo_helm_120_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_120HPF,2),round(embryo_helm_120_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_120HPF,2)]
-			embryo_helm_se_240_1 = [round(embryo_helm_240_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_240HPF,2),round(embryo_helm_240_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_240HPF,2)]
+			embryo_helm_se_2_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_2HPF,2)
+			embryo_helm_se_7_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_7HPF,2)
+			embryo_helm_se_12_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_12HPF,2)
+			embryo_helm_se_24_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_24HPF,2)
+			embryo_helm_se_120_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_120HPF,2)
+			embryo_helm_se_240_1 = round(Embryo_SE.objects.get(nvertx_id=nvertx_1).helm_se_240HPF,2)
 		except :
 			nvertx_1_embryo_helm_invalid = True
 		if not nvertx_1_embryo_warner_invalid and not nvertx_1_embryo_fischer_invalid and not nvertx_1_embryo_helm_invalid :
@@ -309,22 +309,22 @@ def results(request):
 					regen_96_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_96HPA+1,2),2)
 					regen_120_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_120HPA+1,2),2)
 					regen_144_2 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_144HPA+1,2),2)
-					regen_se_UC_2 = [round(regen_UC_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_UC,2),round(regen_UC_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_UC,2)]
-					regen_se_0_2 = [round(regen_0_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_0HPA,2),round(regen_0_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_0HPA,2)]
-					regen_se_2_2 = [round(regen_2_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_2HPA,2),round(regen_2_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_2HPA,2)]
-					regen_se_4_2 = [round(regen_4_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_4HPA,2),round(regen_4_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_4HPA,2)]
-					regen_se_8_2 = [round(regen_8_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_8HPA,2),round(regen_8_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_8HPA,2)]
-					regen_se_12_2 = [round(regen_12_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_12HPA,2),round(regen_12_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_12HPA,2)]
-					regen_se_16_2 = [round(regen_16_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_16HPA,2),round(regen_16_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_16HPA,2)]
-					regen_se_20_2 = [round(regen_20_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_20HPA,2),round(regen_20_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_20HPA,2)]
-					regen_se_24_2 = [round(regen_24_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_24HPA,2),round(regen_24_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_24HPA,2)]
-					regen_se_36_2 = [round(regen_36_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_36HPA,2),round(regen_36_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_36HPA,2)]
-					regen_se_48_2 = [round(regen_48_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_48HPA,2),round(regen_48_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_48HPA,2)]
-					regen_se_60_2 = [round(regen_60_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_60HPA,2),round(regen_60_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_60HPA,2)]
-					regen_se_72_2 = [round(regen_72_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_72HPA,2),round(regen_72_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_72HPA,2)]
-					regen_se_96_2 = [round(regen_96_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_96HPA,2),round(regen_96_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_96HPA,2)]
-					regen_se_120_2 = [round(regen_120_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_120HPA,2),round(regen_120_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_120HPA,2)]
-					regen_se_144_2 = [round(regen_144_2 - Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_144HPA,2),round(regen_144_2 + Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_144HPA,2)]
+					regen_se_UC_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_UC,2)
+					regen_se_0_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_0HPA,2)
+					regen_se_2_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_2HPA,2)
+					regen_se_4_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_4HPA,2)
+					regen_se_8_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_8HPA,2)
+					regen_se_12_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_12HPA,2)
+					regen_se_16_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_16HPA,2)
+					regen_se_20_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_20HPA,2)
+					regen_se_24_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_24HPA,2)
+					regen_se_36_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_36HPA,2)
+					regen_se_48_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_48HPA,2)
+					regen_se_60_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_60HPA,2)
+					regen_se_72_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_72HPA,2)
+					regen_se_96_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_96HPA,2)
+					regen_se_120_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_120HPA,2)
+					regen_se_144_2 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_2).regen_log_se_144HPA,2)
 				else :
 					regen_UC_2 = round(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_UC,2)
 					regen_0_2 = round(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_0HPA,2)
@@ -342,22 +342,22 @@ def results(request):
 					regen_96_2 = round(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_96HPA,2)
 					regen_120_2 = round(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_120HPA,2)
 					regen_144_2 = round(Regen_cpm.objects.get(nvertx_id=nvertx_2).regen_anc_144HPA,2)
-					regen_se_UC_2 = [round(regen_UC_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_UC,2),round(regen_UC_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_UC,2)]
-					regen_se_0_2 = [round(regen_0_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_0HPA,2),round(regen_0_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_0HPA,2)]
-					regen_se_2_2 = [round(regen_2_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_2HPA,2),round(regen_2_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_2HPA,2)]
-					regen_se_4_2 = [round(regen_4_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_4HPA,2),round(regen_4_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_4HPA,2)]
-					regen_se_8_2 = [round(regen_8_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_8HPA,2),round(regen_8_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_8HPA,2)]
-					regen_se_12_2 = [round(regen_12_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_12HPA,2),round(regen_12_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_12HPA,2)]
-					regen_se_16_2 = [round(regen_16_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_16HPA,2),round(regen_16_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_16HPA,2)]
-					regen_se_20_2 = [round(regen_20_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_20HPA,2),round(regen_20_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_20HPA,2)]
-					regen_se_24_2 = [round(regen_24_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_24HPA,2),round(regen_24_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_24HPA,2)]
-					regen_se_36_2 = [round(regen_36_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_36HPA,2),round(regen_36_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_36HPA,2)]
-					regen_se_48_2 = [round(regen_48_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_48HPA,2),round(regen_48_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_48HPA,2)]
-					regen_se_60_2 = [round(regen_60_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_60HPA,2),round(regen_60_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_60HPA,2)]
-					regen_se_72_2 = [round(regen_72_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_72HPA,2),round(regen_72_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_72HPA,2)]
-					regen_se_96_2 = [round(regen_96_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_96HPA,2),round(regen_96_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_96HPA,2)]
-					regen_se_120_2 = [round(regen_120_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_120HPA,2),round(regen_120_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_120HPA,2)]
-					regen_se_144_2 = [round(regen_144_2 - Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_144HPA,2),round(regen_144_2 + Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_144HPA,2)]
+					regen_se_UC_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_UC,2)
+					regen_se_0_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_0HPA,2)
+					regen_se_2_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_2HPA,2)
+					regen_se_4_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_4HPA,2)
+					regen_se_8_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_8HPA,2)
+					regen_se_12_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_12HPA,2)
+					regen_se_16_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_16HPA,2)
+					regen_se_20_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_20HPA,2)
+					regen_se_24_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_24HPA,2)
+					regen_se_36_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_36HPA,2)
+					regen_se_48_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_48HPA,2)
+					regen_se_60_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_60HPA,2)
+					regen_se_72_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_72HPA,2)
+					regen_se_96_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_96HPA,2)
+					regen_se_120_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_120HPA,2)
+					regen_se_144_2 = round(Regen_SE.objects.get(nvertx_id=nvertx_2).regen_se_144HPA,2)
 			except :
 				nvertx_2_regen_invalid = True
 			try :
@@ -369,14 +369,14 @@ def results(request):
 				embryo_warner_144_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).warner_anc_144HPF,2)
 				embryo_warner_168_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).warner_anc_168HPF,2)
 				embryo_warner_192_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).warner_anc_192HPF,2)
-				embryo_warner_se_24_2 = [round(embryo_warner_24_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_24HPF,2),round(embryo_warner_24_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_24HPF,2)]
-				embryo_warner_se_48_2 = [round(embryo_warner_48_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_48HPF,2),round(embryo_warner_48_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_48HPF,2)]
-				embryo_warner_se_72_2 = [round(embryo_warner_72_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_72HPF,2),round(embryo_warner_72_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_72HPF,2)]
-				embryo_warner_se_96_2 = [round(embryo_warner_96_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_96HPF,2),round(embryo_warner_96_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_96HPF,2)]
-				embryo_warner_se_120_2 = [round(embryo_warner_120_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_120HPF,2),round(embryo_warner_120_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_120HPF,2)]
-				embryo_warner_se_144_2 = [round(embryo_warner_144_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_144HPF,2),round(embryo_warner_144_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_144HPF,2)]
-				embryo_warner_se_168_2 = [round(embryo_warner_168_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_168HPF,2),round(embryo_warner_168_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_168HPF,2)]
-				embryo_warner_se_192_2 = [round(embryo_warner_192_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_192HPF,2),round(embryo_warner_192_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_192HPF,2)]
+				embryo_warner_se_24_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_24HPF,2)
+				embryo_warner_se_48_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_48HPF,2)
+				embryo_warner_se_72_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_72HPF,2)
+				embryo_warner_se_96_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_96HPF,2)
+				embryo_warner_se_120_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_120HPF,2)
+				embryo_warner_se_144_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_144HPF,2)
+				embryo_warner_se_168_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_168HPF,2)
+				embryo_warner_se_192_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).warner_se_192HPF,2)
 			except :
 				nvertx_2_embryo_warner_invalid = True
 			try :
@@ -400,26 +400,26 @@ def results(request):
 				embryo_fischer_17_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).fischer_anc_17HPF,2)
 				embryo_fischer_18_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).fischer_anc_18HPF,2)
 				embryo_fischer_19_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).fischer_anc_19HPF,2)
-				embryo_fischer_se_0_2 = [round(embryo_fischer_0_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_0HPF,2),round(embryo_fischer_0_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_0HPF,2)]
-				embryo_fischer_se_1_2 = [round(embryo_fischer_1_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_1HPF,2),round(embryo_fischer_1_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_1HPF,2)]
-				embryo_fischer_se_2_2 = [round(embryo_fischer_2_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_2HPF,2),round(embryo_fischer_2_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_2HPF,2)]
-				embryo_fischer_se_3_2 = [round(embryo_fischer_3_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_3HPF,2),round(embryo_fischer_3_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_3HPF,2)]
-				embryo_fischer_se_4_2 = [round(embryo_fischer_4_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_4HPF,2),round(embryo_fischer_4_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_4HPF,2)]
-				embryo_fischer_se_5_2 = [round(embryo_fischer_5_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_5HPF,2),round(embryo_fischer_5_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_5HPF,2)]
-				embryo_fischer_se_6_2 = [round(embryo_fischer_6_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_6HPF,2),round(embryo_fischer_6_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_6HPF,2)]
-				embryo_fischer_se_7_2 = [round(embryo_fischer_7_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_7HPF,2),round(embryo_fischer_7_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_7HPF,2)]
-				embryo_fischer_se_8_2 = [round(embryo_fischer_8_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_8HPF,2),round(embryo_fischer_8_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_8HPF,2)]
-				embryo_fischer_se_9_2 = [round(embryo_fischer_9_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_9HPF,2),round(embryo_fischer_9_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_9HPF,2)]
-				#embryo_fischer_se_10_2 = [round(embryo_fischer_10_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_10HPF,2),round(embryo_fischer_10_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_10HPF,2)]
-				embryo_fischer_se_11_2 = [round(embryo_fischer_11_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_11HPF,2),round(embryo_fischer_11_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_11HPF,2)]
-				embryo_fischer_se_12_2 = [round(embryo_fischer_12_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_12HPF,2),round(embryo_fischer_12_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_12HPF,2)]
-				embryo_fischer_se_13_2 = [round(embryo_fischer_13_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_13HPF,2),round(embryo_fischer_13_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_13HPF,2)]
-				embryo_fischer_se_14_2 = [round(embryo_fischer_14_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_14HPF,2),round(embryo_fischer_14_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_14HPF,2)]
-				embryo_fischer_se_15_2 = [round(embryo_fischer_15_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_15HPF,2),round(embryo_fischer_15_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_15HPF,2)]
-				embryo_fischer_se_16_2 = [round(embryo_fischer_16_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_16HPF,2),round(embryo_fischer_16_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_16HPF,2)]
-				embryo_fischer_se_17_2 = [round(embryo_fischer_17_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_17HPF,2),round(embryo_fischer_17_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_17HPF,2)]
-				embryo_fischer_se_18_2 = [round(embryo_fischer_18_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_18HPF,2),round(embryo_fischer_18_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_18HPF,2)]
-				embryo_fischer_se_19_2 = [round(embryo_fischer_19_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_19HPF,2),round(embryo_fischer_19_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_19HPF,2)]
+				embryo_fischer_se_0_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_0HPF,2)
+				embryo_fischer_se_1_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_1HPF,2)
+				embryo_fischer_se_2_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_2HPF,2)
+				embryo_fischer_se_3_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_3HPF,2)
+				embryo_fischer_se_4_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_4HPF,2)
+				embryo_fischer_se_5_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_5HPF,2)
+				embryo_fischer_se_6_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_6HPF,2)
+				embryo_fischer_se_7_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_7HPF,2)
+				embryo_fischer_se_8_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_8HPF,2)
+				embryo_fischer_se_9_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_9HPF,2)
+				#embryo_fischer_se_10_1 = [round(embryo_fischer_10_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2),round(embryo_fischer_10_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2)]
+				embryo_fischer_se_11_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_11HPF,2)
+				embryo_fischer_se_12_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_12HPF,2)
+				embryo_fischer_se_13_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_13HPF,2)
+				embryo_fischer_se_14_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_14HPF,2)
+				embryo_fischer_se_15_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_15HPF,2)
+				embryo_fischer_se_16_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_16HPF,2)
+				embryo_fischer_se_17_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_17HPF,2)
+				embryo_fischer_se_18_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_18HPF,2)
+				embryo_fischer_se_19_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).fischer_se_19HPF,2)
 			except :
 				nvertx_2_embryo_fischer_invalid = True
 			try :
@@ -429,12 +429,12 @@ def results(request):
 				embryo_helm_24_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_24HPF,2)
 				embryo_helm_120_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_120HPF,2)
 				embryo_helm_240_2 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_2).helm_anc_240HPF,2)
-				embryo_helm_se_2_2 = [round(embryo_helm_2_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_2HPF,2),round(embryo_helm_2_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_2HPF,2)]
-				embryo_helm_se_7_2 = [round(embryo_helm_7_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_7HPF,2),round(embryo_helm_7_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_7HPF,2)]
-				embryo_helm_se_12_2 = [round(embryo_helm_12_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_12HPF,2),round(embryo_helm_12_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_12HPF,2)]
-				embryo_helm_se_24_2 = [round(embryo_helm_24_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_24HPF,2),round(embryo_helm_24_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_24HPF,2)]
-				embryo_helm_se_120_2 = [round(embryo_helm_120_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_120HPF,2),round(embryo_helm_120_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_120HPF,2)]
-				embryo_helm_se_240_2 = [round(embryo_helm_240_2 - Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_240HPF,2),round(embryo_helm_240_2 + Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_240HPF,2)]
+				embryo_helm_se_2_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_2HPF,2)
+				embryo_helm_se_7_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_7HPF,2)
+				embryo_helm_se_12_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_12HPF,2)
+				embryo_helm_se_24_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_24HPF,2)
+				embryo_helm_se_120_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_120HPF,2)
+				embryo_helm_se_240_2 = round(Embryo_SE.objects.get(nvertx_id=nvertx_2).helm_se_240HPF,2)
 			except :
 				nvertx_2_embryo_helm_invalid = True
 			if not nvertx_2_embryo_warner_invalid and not nvertx_2_embryo_fischer_invalid and not nvertx_2_embryo_helm_invalid :
@@ -529,22 +529,22 @@ def results(request):
 					regen_96_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_96HPA+1,2),2)
 					regen_120_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_120HPA+1,2),2)
 					regen_144_3 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_144HPA+1,2),2)
-					regen_se_UC_3 = [round(regen_UC_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_UC,2),round(regen_UC_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_UC,2)]
-					regen_se_0_3 = [round(regen_0_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_0HPA,2),round(regen_0_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_0HPA,2)]
-					regen_se_2_3 = [round(regen_2_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_2HPA,2),round(regen_2_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_2HPA,2)]
-					regen_se_4_3 = [round(regen_4_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_4HPA,2),round(regen_4_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_4HPA,2)]
-					regen_se_8_3 = [round(regen_8_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_8HPA,2),round(regen_8_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_8HPA,2)]
-					regen_se_12_3 = [round(regen_12_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_12HPA,2),round(regen_12_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_12HPA,2)]
-					regen_se_16_3 = [round(regen_16_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_16HPA,2),round(regen_16_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_16HPA,2)]
-					regen_se_20_3 = [round(regen_20_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_20HPA,2),round(regen_20_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_20HPA,2)]
-					regen_se_24_3 = [round(regen_24_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_24HPA,2),round(regen_24_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_24HPA,2)]
-					regen_se_36_3 = [round(regen_36_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_36HPA,2),round(regen_36_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_36HPA,2)]
-					regen_se_48_3 = [round(regen_48_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_48HPA,2),round(regen_48_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_48HPA,2)]
-					regen_se_60_3 = [round(regen_60_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_60HPA,2),round(regen_60_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_60HPA,2)]
-					regen_se_72_3 = [round(regen_72_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_72HPA,2),round(regen_72_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_72HPA,2)]
-					regen_se_96_3 = [round(regen_96_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_96HPA,2),round(regen_96_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_96HPA,2)]
-					regen_se_120_3 = [round(regen_120_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_120HPA,2),round(regen_120_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_120HPA,2)]
-					regen_se_144_3 = [round(regen_144_3 - Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_144HPA,2),round(regen_144_3 + Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_144HPA,2)]
+					regen_se_UC_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_UC,2)
+					regen_se_0_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_0HPA,2)
+					regen_se_2_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_2HPA,2)
+					regen_se_4_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_4HPA,2)
+					regen_se_8_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_8HPA,2)
+					regen_se_12_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_12HPA,2)
+					regen_se_16_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_16HPA,2)
+					regen_se_20_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_20HPA,2)
+					regen_se_24_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_24HPA,2)
+					regen_se_36_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_36HPA,2)
+					regen_se_48_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_48HPA,2)
+					regen_se_60_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_60HPA,2)
+					regen_se_72_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_72HPA,2)
+					regen_se_96_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_96HPA,2)
+					regen_se_120_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_120HPA,2)
+					regen_se_144_3 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_3).regen_log_se_144HPA,2)
 				else :
 					regen_UC_3 = round(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_UC,2)
 					regen_0_3 = round(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_0HPA,2)
@@ -562,22 +562,22 @@ def results(request):
 					regen_96_3 = round(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_96HPA,2)
 					regen_120_3 = round(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_120HPA,2)
 					regen_144_3 = round(Regen_cpm.objects.get(nvertx_id=nvertx_3).regen_anc_144HPA,2)
-					regen_se_UC_3 = [round(regen_UC_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_UC,2),round(regen_UC_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_UC,2)]
-					regen_se_0_3 = [round(regen_0_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_0HPA,2),round(regen_0_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_0HPA,2)]
-					regen_se_2_3 = [round(regen_2_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_2HPA,2),round(regen_2_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_2HPA,2)]
-					regen_se_4_3 = [round(regen_4_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_4HPA,2),round(regen_4_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_4HPA,2)]
-					regen_se_8_3 = [round(regen_8_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_8HPA,2),round(regen_8_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_8HPA,2)]
-					regen_se_12_3 = [round(regen_12_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_12HPA,2),round(regen_12_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_12HPA,2)]
-					regen_se_16_3 = [round(regen_16_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_16HPA,2),round(regen_16_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_16HPA,2)]
-					regen_se_20_3 = [round(regen_20_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_20HPA,2),round(regen_20_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_20HPA,2)]
-					regen_se_24_3 = [round(regen_24_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_24HPA,2),round(regen_24_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_24HPA,2)]
-					regen_se_36_3 = [round(regen_36_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_36HPA,2),round(regen_36_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_36HPA,2)]
-					regen_se_48_3 = [round(regen_48_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_48HPA,2),round(regen_48_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_48HPA,2)]
-					regen_se_60_3 = [round(regen_60_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_60HPA,2),round(regen_60_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_60HPA,2)]
-					regen_se_72_3 = [round(regen_72_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_72HPA,2),round(regen_72_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_72HPA,2)]
-					regen_se_96_3 = [round(regen_96_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_96HPA,2),round(regen_96_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_96HPA,2)]
-					regen_se_120_3 = [round(regen_120_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_120HPA,2),round(regen_120_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_120HPA,2)]
-					regen_se_144_3 = [round(regen_144_3 - Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_144HPA,2),round(regen_144_3 + Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_144HPA,2)]
+					regen_se_UC_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_UC,2)
+					regen_se_0_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_0HPA,2)
+					regen_se_2_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_2HPA,2)
+					regen_se_4_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_4HPA,2)
+					regen_se_8_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_8HPA,2)
+					regen_se_12_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_12HPA,2)
+					regen_se_16_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_16HPA,2)
+					regen_se_20_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_20HPA,2)
+					regen_se_24_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_24HPA,2)
+					regen_se_36_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_36HPA,2)
+					regen_se_48_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_48HPA,2)
+					regen_se_60_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_60HPA,2)
+					regen_se_72_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_72HPA,2)
+					regen_se_96_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_96HPA,2)
+					regen_se_120_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_120HPA,2)
+					regen_se_144_3 = round(Regen_SE.objects.get(nvertx_id=nvertx_3).regen_se_144HPA,2)
 			except :
 				nvertx_3_regen_invalid = True
 			try :
@@ -589,14 +589,14 @@ def results(request):
 				embryo_warner_144_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).warner_anc_144HPF,2)
 				embryo_warner_168_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).warner_anc_168HPF,2)
 				embryo_warner_192_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).warner_anc_192HPF,2)
-				embryo_warner_se_24_3 = [round(embryo_warner_24_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_24HPF,2),round(embryo_warner_24_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_24HPF,2)]
-				embryo_warner_se_48_3 = [round(embryo_warner_48_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_48HPF,2),round(embryo_warner_48_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_48HPF,2)]
-				embryo_warner_se_72_3 = [round(embryo_warner_72_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_72HPF,2),round(embryo_warner_72_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_72HPF,2)]
-				embryo_warner_se_96_3 = [round(embryo_warner_96_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_96HPF,2),round(embryo_warner_96_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_96HPF,2)]
-				embryo_warner_se_120_3 = [round(embryo_warner_120_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_120HPF,2),round(embryo_warner_120_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_120HPF,2)]
-				embryo_warner_se_144_3 = [round(embryo_warner_144_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_144HPF,2),round(embryo_warner_144_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_144HPF,2)]
-				embryo_warner_se_168_3 = [round(embryo_warner_168_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_168HPF,2),round(embryo_warner_168_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_168HPF,2)]
-				embryo_warner_se_192_3 = [round(embryo_warner_192_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_192HPF,2),round(embryo_warner_192_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_192HPF,2)]
+				embryo_warner_se_24_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_24HPF,2)
+				embryo_warner_se_48_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_48HPF,2)
+				embryo_warner_se_72_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_72HPF,2)
+				embryo_warner_se_96_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_96HPF,2)
+				embryo_warner_se_120_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_120HPF,2)
+				embryo_warner_se_144_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_144HPF,2)
+				embryo_warner_se_168_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_168HPF,2)
+				embryo_warner_se_192_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).warner_se_192HPF,2)
 			except :
 				nvertx_3_embryo_warner_invalid = True
 			try :
@@ -620,26 +620,26 @@ def results(request):
 				embryo_fischer_17_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).fischer_anc_17HPF,2)
 				embryo_fischer_18_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).fischer_anc_18HPF,2)
 				embryo_fischer_19_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).fischer_anc_19HPF,2)
-				embryo_fischer_se_0_3 = [round(embryo_fischer_0_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_0HPF,2),round(embryo_fischer_0_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_0HPF,2)]
-				embryo_fischer_se_1_3 = [round(embryo_fischer_1_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_1HPF,2),round(embryo_fischer_1_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_1HPF,2)]
-				embryo_fischer_se_2_3 = [round(embryo_fischer_2_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_2HPF,2),round(embryo_fischer_2_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_2HPF,2)]
-				embryo_fischer_se_3_3 = [round(embryo_fischer_3_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_3HPF,2),round(embryo_fischer_3_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_3HPF,2)]
-				embryo_fischer_se_4_3 = [round(embryo_fischer_4_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_4HPF,2),round(embryo_fischer_4_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_4HPF,2)]
-				embryo_fischer_se_5_3 = [round(embryo_fischer_5_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_5HPF,2),round(embryo_fischer_5_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_5HPF,2)]
-				embryo_fischer_se_6_3 = [round(embryo_fischer_6_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_6HPF,2),round(embryo_fischer_6_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_6HPF,2)]
-				embryo_fischer_se_7_3 = [round(embryo_fischer_7_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_7HPF,2),round(embryo_fischer_7_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_7HPF,2)]
-				embryo_fischer_se_8_3 = [round(embryo_fischer_8_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_8HPF,2),round(embryo_fischer_8_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_8HPF,2)]
-				embryo_fischer_se_9_3 = [round(embryo_fischer_9_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_9HPF,2),round(embryo_fischer_9_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_9HPF,2)]
-				#embryo_fischer_se_10_3 = [round(embryo_fischer_10_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_10HPF,2),round(embryo_fischer_10_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_10HPF,2)]
-				embryo_fischer_se_11_3 = [round(embryo_fischer_11_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_11HPF,2),round(embryo_fischer_11_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_11HPF,2)]
-				embryo_fischer_se_12_3 = [round(embryo_fischer_12_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_12HPF,2),round(embryo_fischer_12_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_12HPF,2)]
-				embryo_fischer_se_13_3 = [round(embryo_fischer_13_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_13HPF,2),round(embryo_fischer_13_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_13HPF,2)]
-				embryo_fischer_se_14_3 = [round(embryo_fischer_14_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_14HPF,2),round(embryo_fischer_14_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_14HPF,2)]
-				embryo_fischer_se_15_3 = [round(embryo_fischer_15_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_15HPF,2),round(embryo_fischer_15_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_15HPF,2)]
-				embryo_fischer_se_16_3 = [round(embryo_fischer_16_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_16HPF,2),round(embryo_fischer_16_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_16HPF,2)]
-				embryo_fischer_se_17_3 = [round(embryo_fischer_17_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_17HPF,2),round(embryo_fischer_17_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_17HPF,2)]
-				embryo_fischer_se_18_3 = [round(embryo_fischer_18_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_18HPF,2),round(embryo_fischer_18_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_18HPF,2)]
-				embryo_fischer_se_19_3 = [round(embryo_fischer_19_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_19HPF,2),round(embryo_fischer_19_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_19HPF,2)]
+				embryo_fischer_se_0_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_0HPF,2)
+				embryo_fischer_se_1_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_1HPF,2)
+				embryo_fischer_se_2_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_2HPF,2)
+				embryo_fischer_se_3_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_3HPF,2)
+				embryo_fischer_se_4_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_4HPF,2)
+				embryo_fischer_se_5_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_5HPF,2)
+				embryo_fischer_se_6_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_6HPF,2)
+				embryo_fischer_se_7_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_7HPF,2)
+				embryo_fischer_se_8_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_8HPF,2)
+				embryo_fischer_se_9_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_9HPF,2)
+				#embryo_fischer_se_10_1 = [round(embryo_fischer_10_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2),round(embryo_fischer_10_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2)]
+				embryo_fischer_se_11_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_11HPF,2)
+				embryo_fischer_se_12_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_12HPF,2)
+				embryo_fischer_se_13_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_13HPF,2)
+				embryo_fischer_se_14_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_14HPF,2)
+				embryo_fischer_se_15_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_15HPF,2)
+				embryo_fischer_se_16_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_16HPF,2)
+				embryo_fischer_se_17_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_17HPF,2)
+				embryo_fischer_se_18_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_18HPF,2)
+				embryo_fischer_se_19_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).fischer_se_19HPF,2)
 			except :
 				nvertx_3_embryo_fischer_invalid = True
 			try :
@@ -649,12 +649,12 @@ def results(request):
 				embryo_helm_24_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).helm_anc_24HPF,2)
 				embryo_helm_120_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).helm_anc_120HPF,2)
 				embryo_helm_240_3 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_3).helm_anc_240HPF,2)
-				embryo_helm_se_2_3 = [round(embryo_helm_2_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_2HPF,2),round(embryo_helm_2_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_2HPF,2)]
-				embryo_helm_se_7_3 = [round(embryo_helm_7_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_7HPF,2),round(embryo_helm_7_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_7HPF,2)]
-				embryo_helm_se_12_3 = [round(embryo_helm_12_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_12HPF,2),round(embryo_helm_12_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_12HPF,2)]
-				embryo_helm_se_24_3 = [round(embryo_helm_24_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_24HPF,2),round(embryo_helm_24_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_24HPF,2)]
-				embryo_helm_se_120_3 = [round(embryo_helm_120_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_120HPF,2),round(embryo_helm_120_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_120HPF,2)]
-				embryo_helm_se_240_3 = [round(embryo_helm_240_3 - Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_240HPF,2),round(embryo_helm_240_3 + Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_240HPF,2)]
+				embryo_helm_se_2_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_2HPF,2)
+				embryo_helm_se_7_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_7HPF,2)
+				embryo_helm_se_12_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_12HPF,2)
+				embryo_helm_se_24_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_24HPF,2)
+				embryo_helm_se_120_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_120HPF,2)
+				embryo_helm_se_240_3 = round(Embryo_SE.objects.get(nvertx_id=nvertx_3).helm_se_240HPF,2)
 			except :
 				nvertx_3_embryo_helm_invalid = True
 			if not nvertx_3_embryo_warner_invalid and not nvertx_3_embryo_fischer_invalid and not nvertx_3_embryo_helm_invalid :
@@ -749,22 +749,22 @@ def results(request):
 					regen_96_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_96HPA+1,2),2)
 					regen_120_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_120HPA+1,2),2)
 					regen_144_4 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_144HPA+1,2),2)
-					regen_se_UC_4 = [round(regen_UC_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_UC,2),round(regen_UC_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_UC,2)]
-					regen_se_0_4 = [round(regen_0_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_0HPA,2),round(regen_0_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_0HPA,2)]
-					regen_se_2_4 = [round(regen_2_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_2HPA,2),round(regen_2_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_2HPA,2)]
-					regen_se_4_4 = [round(regen_4_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_4HPA,2),round(regen_4_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_4HPA,2)]
-					regen_se_8_4 = [round(regen_8_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_8HPA,2),round(regen_8_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_8HPA,2)]
-					regen_se_12_4 = [round(regen_12_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_12HPA,2),round(regen_12_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_12HPA,2)]
-					regen_se_16_4 = [round(regen_16_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_16HPA,2),round(regen_16_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_16HPA,2)]
-					regen_se_20_4 = [round(regen_20_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_20HPA,2),round(regen_20_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_20HPA,2)]
-					regen_se_24_4 = [round(regen_24_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_24HPA,2),round(regen_24_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_24HPA,2)]
-					regen_se_36_4 = [round(regen_36_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_36HPA,2),round(regen_36_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_36HPA,2)]
-					regen_se_48_4 = [round(regen_48_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_48HPA,2),round(regen_48_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_48HPA,2)]
-					regen_se_60_4 = [round(regen_60_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_60HPA,2),round(regen_60_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_60HPA,2)]
-					regen_se_72_4 = [round(regen_72_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_72HPA,2),round(regen_72_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_72HPA,2)]
-					regen_se_96_4 = [round(regen_96_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_96HPA,2),round(regen_96_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_96HPA,2)]
-					regen_se_120_4 = [round(regen_120_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_120HPA,2),round(regen_120_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_120HPA,2)]
-					regen_se_144_4 = [round(regen_144_4 - Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_144HPA,2),round(regen_144_4 + Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_144HPA,2)]
+					regen_se_UC_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_UC,2)
+					regen_se_0_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_0HPA,2)
+					regen_se_2_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_2HPA,2)
+					regen_se_4_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_4HPA,2)
+					regen_se_8_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_8HPA,2)
+					regen_se_12_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_12HPA,2)
+					regen_se_16_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_16HPA,2)
+					regen_se_20_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_20HPA,2)
+					regen_se_24_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_24HPA,2)
+					regen_se_36_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_36HPA,2)
+					regen_se_48_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_48HPA,2)
+					regen_se_60_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_60HPA,2)
+					regen_se_72_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_72HPA,2)
+					regen_se_96_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_96HPA,2)
+					regen_se_120_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_120HPA,2)
+					regen_se_144_4 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_4).regen_log_se_144HPA,2)
 				else :
 					regen_UC_4 = round(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_UC,2)
 					regen_0_4 = round(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_0HPA,2)
@@ -782,22 +782,22 @@ def results(request):
 					regen_96_4 = round(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_96HPA,2)
 					regen_120_4 = round(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_120HPA,2)
 					regen_144_4 = round(Regen_cpm.objects.get(nvertx_id=nvertx_4).regen_anc_144HPA,2)
-					regen_se_UC_4 = [round(regen_UC_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_UC,2),round(regen_UC_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_UC,2)]
-					regen_se_0_4 = [round(regen_0_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_0HPA,2),round(regen_0_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_0HPA,2)]
-					regen_se_2_4 = [round(regen_2_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_2HPA,2),round(regen_2_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_2HPA,2)]
-					regen_se_4_4 = [round(regen_4_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_4HPA,2),round(regen_4_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_4HPA,2)]
-					regen_se_8_4 = [round(regen_8_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_8HPA,2),round(regen_8_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_8HPA,2)]
-					regen_se_12_4 = [round(regen_12_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_12HPA,2),round(regen_12_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_12HPA,2)]
-					regen_se_16_4 = [round(regen_16_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_16HPA,2),round(regen_16_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_16HPA,2)]
-					regen_se_20_4 = [round(regen_20_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_20HPA,2),round(regen_20_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_20HPA,2)]
-					regen_se_24_4 = [round(regen_24_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_24HPA,2),round(regen_24_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_24HPA,2)]
-					regen_se_36_4 = [round(regen_36_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_36HPA,2),round(regen_36_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_36HPA,2)]
-					regen_se_48_4 = [round(regen_48_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_48HPA,2),round(regen_48_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_48HPA,2)]
-					regen_se_60_4 = [round(regen_60_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_60HPA,2),round(regen_60_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_60HPA,2)]
-					regen_se_72_4 = [round(regen_72_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_72HPA,2),round(regen_72_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_72HPA,2)]
-					regen_se_96_4 = [round(regen_96_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_96HPA,2),round(regen_96_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_96HPA,2)]
-					regen_se_120_4 = [round(regen_120_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_120HPA,2),round(regen_120_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_120HPA,2)]
-					regen_se_144_4 = [round(regen_144_4 - Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_144HPA,2),round(regen_144_4 + Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_144HPA,2)]
+					regen_se_UC_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_UC,2)
+					regen_se_0_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_0HPA,2)
+					regen_se_2_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_2HPA,2)
+					regen_se_4_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_4HPA,2)
+					regen_se_8_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_8HPA,2)
+					regen_se_12_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_12HPA,2)
+					regen_se_16_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_16HPA,2)
+					regen_se_20_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_20HPA,2)
+					regen_se_24_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_24HPA,2)
+					regen_se_36_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_36HPA,2)
+					regen_se_48_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_48HPA,2)
+					regen_se_60_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_60HPA,2)
+					regen_se_72_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_72HPA,2)
+					regen_se_96_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_96HPA,2)
+					regen_se_120_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_120HPA,2)
+					regen_se_144_4 = round(Regen_SE.objects.get(nvertx_id=nvertx_4).regen_se_144HPA,2)
 			except :
 				nvertx_4_regen_invalid = True
 			try :
@@ -809,14 +809,14 @@ def results(request):
 				embryo_warner_144_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).warner_anc_144HPF,2)
 				embryo_warner_168_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).warner_anc_168HPF,2)
 				embryo_warner_192_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).warner_anc_192HPF,2)
-				embryo_warner_se_24_4 = [round(embryo_warner_24_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_24HPF,2),round(embryo_warner_24_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_24HPF,2)]
-				embryo_warner_se_48_4 = [round(embryo_warner_48_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_48HPF,2),round(embryo_warner_48_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_48HPF,2)]
-				embryo_warner_se_72_4 = [round(embryo_warner_72_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_72HPF,2),round(embryo_warner_72_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_72HPF,2)]
-				embryo_warner_se_96_4 = [round(embryo_warner_96_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_96HPF,2),round(embryo_warner_96_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_96HPF,2)]
-				embryo_warner_se_120_4 = [round(embryo_warner_120_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_120HPF,2),round(embryo_warner_120_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_120HPF,2)]
-				embryo_warner_se_144_4 = [round(embryo_warner_144_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_144HPF,2),round(embryo_warner_144_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_144HPF,2)]
-				embryo_warner_se_168_4 = [round(embryo_warner_168_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_168HPF,2),round(embryo_warner_168_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_168HPF,2)]
-				embryo_warner_se_192_4 = [round(embryo_warner_192_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_192HPF,2),round(embryo_warner_192_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_192HPF,2)]
+				embryo_warner_se_24_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_24HPF,2)
+				embryo_warner_se_48_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_48HPF,2)
+				embryo_warner_se_72_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_72HPF,2)
+				embryo_warner_se_96_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_96HPF,2)
+				embryo_warner_se_120_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_120HPF,2)
+				embryo_warner_se_144_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_144HPF,2)
+				embryo_warner_se_168_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_168HPF,2)
+				embryo_warner_se_192_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).warner_se_192HPF,2)
 			except :
 				nvertx_4_embryo_warner_invalid = True
 			try :
@@ -840,26 +840,26 @@ def results(request):
 				embryo_fischer_17_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).fischer_anc_17HPF,2)
 				embryo_fischer_18_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).fischer_anc_18HPF,2)
 				embryo_fischer_19_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).fischer_anc_19HPF,2)
-				embryo_fischer_se_0_4 = [round(embryo_fischer_0_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_0HPF,2),round(embryo_fischer_0_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_0HPF,2)]
-				embryo_fischer_se_1_4 = [round(embryo_fischer_1_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_1HPF,2),round(embryo_fischer_1_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_1HPF,2)]
-				embryo_fischer_se_2_4 = [round(embryo_fischer_2_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_2HPF,2),round(embryo_fischer_2_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_2HPF,2)]
-				embryo_fischer_se_3_4 = [round(embryo_fischer_3_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_3HPF,2),round(embryo_fischer_3_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_3HPF,2)]
-				embryo_fischer_se_4_4 = [round(embryo_fischer_4_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_4HPF,2),round(embryo_fischer_4_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_4HPF,2)]
-				embryo_fischer_se_5_4 = [round(embryo_fischer_5_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_5HPF,2),round(embryo_fischer_5_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_5HPF,2)]
-				embryo_fischer_se_6_4 = [round(embryo_fischer_6_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_6HPF,2),round(embryo_fischer_6_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_6HPF,2)]
-				embryo_fischer_se_7_4 = [round(embryo_fischer_7_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_7HPF,2),round(embryo_fischer_7_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_7HPF,2)]
-				embryo_fischer_se_8_4 = [round(embryo_fischer_8_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_8HPF,2),round(embryo_fischer_8_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_8HPF,2)]
-				embryo_fischer_se_9_4 = [round(embryo_fischer_9_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_9HPF,2),round(embryo_fischer_9_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_9HPF,2)]
-				#embryo_fischer_se_10_4 = [round(embryo_fischer_10_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_10HPF,2),round(embryo_fischer_10_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_10HPF,2)]
-				embryo_fischer_se_11_4 = [round(embryo_fischer_11_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_11HPF,2),round(embryo_fischer_11_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_11HPF,2)]
-				embryo_fischer_se_12_4 = [round(embryo_fischer_12_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_12HPF,2),round(embryo_fischer_12_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_12HPF,2)]
-				embryo_fischer_se_13_4 = [round(embryo_fischer_13_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_13HPF,2),round(embryo_fischer_13_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_13HPF,2)]
-				embryo_fischer_se_14_4 = [round(embryo_fischer_14_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_14HPF,2),round(embryo_fischer_14_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_14HPF,2)]
-				embryo_fischer_se_15_4 = [round(embryo_fischer_15_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_15HPF,2),round(embryo_fischer_15_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_15HPF,2)]
-				embryo_fischer_se_16_4 = [round(embryo_fischer_16_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_16HPF,2),round(embryo_fischer_16_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_16HPF,2)]
-				embryo_fischer_se_17_4 = [round(embryo_fischer_17_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_17HPF,2),round(embryo_fischer_17_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_17HPF,2)]
-				embryo_fischer_se_18_4 = [round(embryo_fischer_18_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_18HPF,2),round(embryo_fischer_18_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_18HPF,2)]
-				embryo_fischer_se_19_4 = [round(embryo_fischer_19_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_19HPF,2),round(embryo_fischer_19_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_19HPF,2)]
+				embryo_fischer_se_0_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_0HPF,2)
+				embryo_fischer_se_1_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_1HPF,2)
+				embryo_fischer_se_2_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_2HPF,2)
+				embryo_fischer_se_3_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_3HPF,2)
+				embryo_fischer_se_4_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_4HPF,2)
+				embryo_fischer_se_5_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_5HPF,2)
+				embryo_fischer_se_6_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_6HPF,2)
+				embryo_fischer_se_7_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_7HPF,2)
+				embryo_fischer_se_8_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_8HPF,2)
+				embryo_fischer_se_9_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_9HPF,2)
+				#embryo_fischer_se_10_1 = [round(embryo_fischer_10_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2),round(embryo_fischer_10_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2)]
+				embryo_fischer_se_11_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_11HPF,2)
+				embryo_fischer_se_12_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_12HPF,2)
+				embryo_fischer_se_13_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_13HPF,2)
+				embryo_fischer_se_14_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_14HPF,2)
+				embryo_fischer_se_15_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_15HPF,2)
+				embryo_fischer_se_16_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_16HPF,2)
+				embryo_fischer_se_17_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_17HPF,2)
+				embryo_fischer_se_18_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_18HPF,2)
+				embryo_fischer_se_19_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).fischer_se_19HPF,2)
 			except :
 				nvertx_4_embryo_fischer_invalid = True
 			try :
@@ -869,12 +869,12 @@ def results(request):
 				embryo_helm_24_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).helm_anc_24HPF,2)
 				embryo_helm_120_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).helm_anc_120HPF,2)
 				embryo_helm_240_4 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_4).helm_anc_240HPF,2)
-				embryo_helm_se_2_4 = [round(embryo_helm_2_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_2HPF,2),round(embryo_helm_2_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_2HPF,2)]
-				embryo_helm_se_7_4 = [round(embryo_helm_7_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_7HPF,2),round(embryo_helm_7_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_7HPF,2)]
-				embryo_helm_se_12_4 = [round(embryo_helm_12_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_12HPF,2),round(embryo_helm_12_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_12HPF,2)]
-				embryo_helm_se_24_4 = [round(embryo_helm_24_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_24HPF,2),round(embryo_helm_24_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_24HPF,2)]
-				embryo_helm_se_120_4 = [round(embryo_helm_120_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_120HPF,2),round(embryo_helm_120_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_120HPF,2)]
-				embryo_helm_se_240_4 = [round(embryo_helm_240_4 - Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_240HPF,2),round(embryo_helm_240_4 + Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_240HPF,2)]
+				embryo_helm_se_2_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_2HPF,2)
+				embryo_helm_se_7_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_7HPF,2)
+				embryo_helm_se_12_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_12HPF,2)
+				embryo_helm_se_24_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_24HPF,2)
+				embryo_helm_se_120_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_120HPF,2)
+				embryo_helm_se_240_4 = round(Embryo_SE.objects.get(nvertx_id=nvertx_4).helm_se_240HPF,2)
 			except :
 				nvertx_4_embryo_helm_invalid = True
 			if not nvertx_4_embryo_warner_invalid and not nvertx_4_embryo_fischer_invalid and not nvertx_4_embryo_helm_invalid :
@@ -969,22 +969,22 @@ def results(request):
 					regen_96_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_96HPA+1,2),2)
 					regen_120_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_120HPA+1,2),2)
 					regen_144_5 = round(math.log(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_144HPA+1,2),2)
-					regen_se_UC_5 = [round(regen_UC_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_UC,2),round(regen_UC_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_UC,2)]
-					regen_se_0_5 = [round(regen_0_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_0HPA,2),round(regen_0_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_0HPA,2)]
-					regen_se_2_5 = [round(regen_2_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_2HPA,2),round(regen_2_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_2HPA,2)]
-					regen_se_4_5 = [round(regen_4_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_4HPA,2),round(regen_4_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_4HPA,2)]
-					regen_se_8_5 = [round(regen_8_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_8HPA,2),round(regen_8_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_8HPA,2)]
-					regen_se_12_5 = [round(regen_12_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_12HPA,2),round(regen_12_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_12HPA,2)]
-					regen_se_16_5 = [round(regen_16_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_16HPA,2),round(regen_16_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_16HPA,2)]
-					regen_se_20_5 = [round(regen_20_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_20HPA,2),round(regen_20_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_20HPA,2)]
-					regen_se_24_5 = [round(regen_24_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_24HPA,2),round(regen_24_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_24HPA,2)]
-					regen_se_36_5 = [round(regen_36_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_36HPA,2),round(regen_36_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_36HPA,2)]
-					regen_se_48_5 = [round(regen_48_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_48HPA,2),round(regen_48_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_48HPA,2)]
-					regen_se_60_5 = [round(regen_60_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_60HPA,2),round(regen_60_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_60HPA,2)]
-					regen_se_72_5 = [round(regen_72_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_72HPA,2),round(regen_72_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_72HPA,2)]
-					regen_se_96_5 = [round(regen_96_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_96HPA,2),round(regen_96_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_96HPA,2)]
-					regen_se_120_5 = [round(regen_120_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_120HPA,2),round(regen_120_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_120HPA,2)]
-					regen_se_144_5 = [round(regen_144_5 - Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_144HPA,2),round(regen_144_5 + Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_144HPA,2)]
+					regen_se_UC_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_UC,2)
+					regen_se_0_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_0HPA,2)
+					regen_se_2_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_2HPA,2)
+					regen_se_4_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_4HPA,2)
+					regen_se_8_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_8HPA,2)
+					regen_se_12_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_12HPA,2)
+					regen_se_16_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_16HPA,2)
+					regen_se_20_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_20HPA,2)
+					regen_se_24_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_24HPA,2)
+					regen_se_36_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_36HPA,2)
+					regen_se_48_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_48HPA,2)
+					regen_se_60_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_60HPA,2)
+					regen_se_72_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_72HPA,2)
+					regen_se_96_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_96HPA,2)
+					regen_se_120_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_120HPA,2)
+					regen_se_144_5 = round(Regen_log_SE.objects.get(nvertx_id=nvertx_5).regen_log_se_144HPA,2)
 				else :
 					regen_UC_5 = round(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_UC,2)
 					regen_0_5 = round(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_0HPA,2)
@@ -1002,22 +1002,22 @@ def results(request):
 					regen_96_5 = round(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_96HPA,2)
 					regen_120_5 = round(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_120HPA,2)
 					regen_144_5 = round(Regen_cpm.objects.get(nvertx_id=nvertx_5).regen_anc_144HPA,2)
-					regen_se_UC_5 = [round(regen_UC_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_UC,2),round(regen_UC_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_UC,2)]
-					regen_se_0_5 = [round(regen_0_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_0HPA,2),round(regen_0_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_0HPA,2)]
-					regen_se_2_5 = [round(regen_2_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_2HPA,2),round(regen_2_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_2HPA,2)]
-					regen_se_4_5 = [round(regen_4_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_4HPA,2),round(regen_4_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_4HPA,2)]
-					regen_se_8_5 = [round(regen_8_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_8HPA,2),round(regen_8_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_8HPA,2)]
-					regen_se_12_5 = [round(regen_12_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_12HPA,2),round(regen_12_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_12HPA,2)]
-					regen_se_16_5 = [round(regen_16_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_16HPA,2),round(regen_16_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_16HPA,2)]
-					regen_se_20_5 = [round(regen_20_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_20HPA,2),round(regen_20_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_20HPA,2)]
-					regen_se_24_5 = [round(regen_24_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_24HPA,2),round(regen_24_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_24HPA,2)]
-					regen_se_36_5 = [round(regen_36_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_36HPA,2),round(regen_36_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_36HPA,2)]
-					regen_se_48_5 = [round(regen_48_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_48HPA,2),round(regen_48_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_48HPA,2)]
-					regen_se_60_5 = [round(regen_60_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_60HPA,2),round(regen_60_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_60HPA,2)]
-					regen_se_72_5 = [round(regen_72_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_72HPA,2),round(regen_72_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_72HPA,2)]
-					regen_se_96_5 = [round(regen_96_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_96HPA,2),round(regen_96_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_96HPA,2)]
-					regen_se_120_5 = [round(regen_120_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_120HPA,2),round(regen_120_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_120HPA,2)]
-					regen_se_144_5 = [round(regen_144_5 - Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_144HPA,2),round(regen_144_5 + Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_144HPA,2)]
+					regen_se_UC_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_UC,2)
+					regen_se_0_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_0HPA,2)
+					regen_se_2_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_2HPA,2)
+					regen_se_4_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_4HPA,2)
+					regen_se_8_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_8HPA,2)
+					regen_se_12_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_12HPA,2)
+					regen_se_16_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_16HPA,2)
+					regen_se_20_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_20HPA,2)
+					regen_se_24_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_24HPA,2)
+					regen_se_36_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_36HPA,2)
+					regen_se_48_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_48HPA,2)
+					regen_se_60_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_60HPA,2)
+					regen_se_72_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_72HPA,2)
+					regen_se_96_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_96HPA,2)
+					regen_se_120_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_120HPA,2)
+					regen_se_144_5 = round(Regen_SE.objects.get(nvertx_id=nvertx_5).regen_se_144HPA,2)
 			except :
 				nvertx_5_regen_invalid = True
 			try :
@@ -1029,14 +1029,14 @@ def results(request):
 				embryo_warner_144_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).warner_anc_144HPF,2)
 				embryo_warner_168_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).warner_anc_168HPF,2)
 				embryo_warner_192_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).warner_anc_192HPF,2)
-				embryo_warner_se_24_5 = [round(embryo_warner_24_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_24HPF,2),round(embryo_warner_24_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_24HPF,2)]
-				embryo_warner_se_48_5 = [round(embryo_warner_48_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_48HPF,2),round(embryo_warner_48_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_48HPF,2)]
-				embryo_warner_se_72_5 = [round(embryo_warner_72_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_72HPF,2),round(embryo_warner_72_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_72HPF,2)]
-				embryo_warner_se_96_5 = [round(embryo_warner_96_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_96HPF,2),round(embryo_warner_96_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_96HPF,2)]
-				embryo_warner_se_120_5 = [round(embryo_warner_120_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_120HPF,2),round(embryo_warner_120_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_120HPF,2)]
-				embryo_warner_se_144_5 = [round(embryo_warner_144_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_144HPF,2),round(embryo_warner_144_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_144HPF,2)]
-				embryo_warner_se_168_5 = [round(embryo_warner_168_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_168HPF,2),round(embryo_warner_168_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_168HPF,2)]
-				embryo_warner_se_192_5 = [round(embryo_warner_192_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_192HPF,2),round(embryo_warner_192_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_192HPF,2)]
+				embryo_warner_se_24_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_24HPF,2)
+				embryo_warner_se_48_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_48HPF,2)
+				embryo_warner_se_72_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_72HPF,2)
+				embryo_warner_se_96_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_96HPF,2)
+				embryo_warner_se_120_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_120HPF,2)
+				embryo_warner_se_144_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_144HPF,2)
+				embryo_warner_se_168_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_168HPF,2)
+				embryo_warner_se_192_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).warner_se_192HPF,2)
 			except :
 				nvertx_5_embryo_warner_invalid = True
 			try :
@@ -1060,26 +1060,26 @@ def results(request):
 				embryo_fischer_17_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).fischer_anc_17HPF,2)
 				embryo_fischer_18_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).fischer_anc_18HPF,2)
 				embryo_fischer_19_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).fischer_anc_19HPF,2)
-				embryo_fischer_se_0_5 = [round(embryo_fischer_0_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_0HPF,2),round(embryo_fischer_0_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_0HPF,2)]
-				embryo_fischer_se_1_5 = [round(embryo_fischer_1_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_1HPF,2),round(embryo_fischer_1_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_1HPF,2)]
-				embryo_fischer_se_2_5 = [round(embryo_fischer_2_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_2HPF,2),round(embryo_fischer_2_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_2HPF,2)]
-				embryo_fischer_se_3_5 = [round(embryo_fischer_3_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_3HPF,2),round(embryo_fischer_3_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_3HPF,2)]
-				embryo_fischer_se_4_5 = [round(embryo_fischer_4_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_4HPF,2),round(embryo_fischer_4_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_4HPF,2)]
-				embryo_fischer_se_5_5 = [round(embryo_fischer_5_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_5HPF,2),round(embryo_fischer_5_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_5HPF,2)]
-				embryo_fischer_se_6_5 = [round(embryo_fischer_6_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_6HPF,2),round(embryo_fischer_6_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_6HPF,2)]
-				embryo_fischer_se_7_5 = [round(embryo_fischer_7_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_7HPF,2),round(embryo_fischer_7_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_7HPF,2)]
-				embryo_fischer_se_8_5 = [round(embryo_fischer_8_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_8HPF,2),round(embryo_fischer_8_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_8HPF,2)]
-				embryo_fischer_se_9_5 = [round(embryo_fischer_9_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_9HPF,2),round(embryo_fischer_9_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_9HPF,2)]
-				#embryo_fischer_se_10_5 = [round(embryo_fischer_10_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_10HPF,2),round(embryo_fischer_10_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_10HPF,2)]
-				embryo_fischer_se_11_5 = [round(embryo_fischer_11_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_11HPF,2),round(embryo_fischer_11_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_11HPF,2)]
-				embryo_fischer_se_12_5 = [round(embryo_fischer_12_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_12HPF,2),round(embryo_fischer_12_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_12HPF,2)]
-				embryo_fischer_se_13_5 = [round(embryo_fischer_13_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_13HPF,2),round(embryo_fischer_13_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_13HPF,2)]
-				embryo_fischer_se_14_5 = [round(embryo_fischer_14_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_14HPF,2),round(embryo_fischer_14_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_14HPF,2)]
-				embryo_fischer_se_15_5 = [round(embryo_fischer_15_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_15HPF,2),round(embryo_fischer_15_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_15HPF,2)]
-				embryo_fischer_se_16_5 = [round(embryo_fischer_16_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_16HPF,2),round(embryo_fischer_16_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_16HPF,2)]
-				embryo_fischer_se_17_5 = [round(embryo_fischer_17_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_17HPF,2),round(embryo_fischer_17_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_17HPF,2)]
-				embryo_fischer_se_18_5 = [round(embryo_fischer_18_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_18HPF,2),round(embryo_fischer_18_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_18HPF,2)]
-				embryo_fischer_se_19_5 = [round(embryo_fischer_19_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_19HPF,2),round(embryo_fischer_19_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_19HPF,2)]
+				embryo_fischer_se_0_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_0HPF,2)
+				embryo_fischer_se_1_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_1HPF,2)
+				embryo_fischer_se_2_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_2HPF,2)
+				embryo_fischer_se_3_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_3HPF,2)
+				embryo_fischer_se_4_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_4HPF,2)
+				embryo_fischer_se_5_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_5HPF,2)
+				embryo_fischer_se_6_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_6HPF,2)
+				embryo_fischer_se_7_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_7HPF,2)
+				embryo_fischer_se_8_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_8HPF,2)
+				embryo_fischer_se_9_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_9HPF,2)
+				#embryo_fischer_se_10_1 = [round(embryo_fischer_10_1 - Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2),round(embryo_fischer_10_1 + Embryo_SE.objects.get(nvertx_id=nvertx_1).fischer_se_10HPF,2)]
+				embryo_fischer_se_11_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_11HPF,2)
+				embryo_fischer_se_12_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_12HPF,2)
+				embryo_fischer_se_13_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_13HPF,2)
+				embryo_fischer_se_14_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_14HPF,2)
+				embryo_fischer_se_15_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_15HPF,2)
+				embryo_fischer_se_16_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_16HPF,2)
+				embryo_fischer_se_17_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_17HPF,2)
+				embryo_fischer_se_18_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_18HPF,2)
+				embryo_fischer_se_19_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).fischer_se_19HPF,2)
 			except :
 				nvertx_5_embryo_fischer_invalid = True
 			try :
@@ -1089,12 +1089,12 @@ def results(request):
 				embryo_helm_24_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).helm_anc_24HPF,2)
 				embryo_helm_120_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).helm_anc_120HPF,2)
 				embryo_helm_240_5 = round(Embryo_cpm.objects.get(nvertx_id=nvertx_5).helm_anc_240HPF,2)
-				embryo_helm_se_2_5 = [round(embryo_helm_2_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_2HPF,2),round(embryo_helm_2_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_2HPF,2)]
-				embryo_helm_se_7_5 = [round(embryo_helm_7_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_7HPF,2),round(embryo_helm_7_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_7HPF,2)]
-				embryo_helm_se_12_5 = [round(embryo_helm_12_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_12HPF,2),round(embryo_helm_12_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_12HPF,2)]
-				embryo_helm_se_24_5 = [round(embryo_helm_24_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_24HPF,2),round(embryo_helm_24_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_24HPF,2)]
-				embryo_helm_se_120_5 = [round(embryo_helm_120_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_120HPF,2),round(embryo_helm_120_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_120HPF,2)]
-				embryo_helm_se_240_5 = [round(embryo_helm_240_5 - Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_240HPF,2),round(embryo_helm_240_5 + Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_240HPF,2)]
+				embryo_helm_se_2_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_2HPF,2)
+				embryo_helm_se_7_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_7HPF,2)
+				embryo_helm_se_12_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_12HPF,2)
+				embryo_helm_se_24_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_24HPF,2)
+				embryo_helm_se_120_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_120HPF,2)
+				embryo_helm_se_240_5 = round(Embryo_SE.objects.get(nvertx_id=nvertx_5).helm_se_240HPF,2)
 			except :
 				nvertx_5_embryo_helm_invalid = True
 			if not nvertx_5_embryo_warner_invalid and not nvertx_5_embryo_fischer_invalid and not nvertx_5_embryo_helm_invalid :

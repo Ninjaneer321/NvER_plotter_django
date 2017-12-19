@@ -301,3 +301,22 @@ nav.shrink img{
 .hidden_row {
   display: none;
 }
+
+/*
+ *  Plotly stuff
+ */
+ 
+.js-plotly-plot .plotly .modebar {
+    left: 15%;
+    transform: translateX(-15%);
+}
+
+#regenPlotWrapper {
+    width: 85vw;
+    height: 60vh;
+}
+
+#embryoPlotWrapper {
+    width: 85vw;
+    height: 60vh;
+}

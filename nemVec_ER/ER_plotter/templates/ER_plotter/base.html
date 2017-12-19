@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template -->
     {% block css %}{% endblock css %}
-    <link rel="stylesheet" href="{% static 'ER_plotter/home0424l.css' %}" />
+    <link rel="stylesheet" href="{% static 'ER_plotter/css/home0424l.css' %}" />
     {% block head %}{% endblock %}
   </head>
 
@@ -40,7 +40,7 @@
             </li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'home' %}">NvERTx - HOME</a></li>       
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'mfuzz' %}">M-Fuzz clusters</a></li>
-            <li><a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/logo_cropped.png' %}" width='70px'></a></li>
+            <li><a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/img/logo_cropped.png' %}" width='70px'></a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'blast' %}">BLAST</a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'about' %}">About</a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'faq' %}">FAQ - Cite</a></li>
@@ -72,7 +72,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-        <div><img class="img-responsive image_text" src="{% static 'ER_plotter/nvImage2.png' %}"></div>
+        <div><img class="img-responsive image_text" src="{% static 'ER_plotter/img/nvImage2.png' %}"></div>
           <form class="nav nav-sidebar" action="{% url 'search' %}" method="get">
             <h3 class="NvERTxInput">Search by gene name</h3>
             {% render_field gene_search_form.gene_name class+='form-control' placeholder='eg : TCF or jgi|Nemve1|199320' %}<br/>
@@ -102,7 +102,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'ER_plotter/js/jquery-3.2.1.min.js' %}"></script>
+    <!-- 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    -->
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="{% static 'ER_plotter/bootStrap/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript">$(window).scroll(function() {
@@ -114,54 +117,11 @@
     });</script>
     
     <!-- INFINITE SCROLL JS SHIT! -->
-    <script src="{% static 'ER_plotter/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'ER_plotter/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'ER_plotter/infinite.js' %}"></script>
+	<script src="{% static 'ER_plotter/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'ER_plotter/js/infinite.min.js' %}"></script>
     {% block js %}
-<!--
-    <script src="{% static 'ER_plotter/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'ER_plotter/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'ER_plotter/infinite.js' %}"></script>
-	
 
-<script type="text/javascript">
-$(function() {
-    $("td[colspan=1]").find("p").hide();
-    $("td[colspan=7]").find("p").hide();
-    $("table").click(function(event) {
-        event.stopPropagation();
-        var $target = $(event.target);
-        if ( $target.closest("td").attr("colspan") < 2 ) {
-            $target.closest("tr").next().find("p").slideToggle();
-        } else {
-            $target.closest("tr").next().find("p").slideToggle();
-        }                    
-    });
-});
-</script>
-<script type="text/javascript">
-var elem = $(".nvid-form-control");
-
-$("body").on("click", ".nvInput_checkboxes",function(){
-	var val = $(this).val();
-    for(var i = 0, len = elem.length; i < len; i++){
-  		if(elem[i].value === val){
-    		elem[i].value = "";
-      	return;
-    	}
-  	}   
-  	for(var i = 0, len = elem.length; i < len; i++){
-  		if(elem[i].value === ""){
-    		elem[i].value = val;
-      	break;
-    	}
-  	}
-});
-</script>
--->
-
-
-{% endblock js %}
+    {% endblock js %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="/Users/vincent/Desktop/dER_plotter/nemVec_ER/ER_plotter/static/ER_plotter/bootStrap/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>

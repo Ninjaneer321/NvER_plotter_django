@@ -1,4 +1,3 @@
-#-*- coding: utf-8 -*-
 <!DOCTYPE html>
 {% extends "ER_plotter/base.html" %}
 {% load static %}
@@ -9,8 +8,15 @@
 
 {% block head %}
 
+<script src="{% static 'ER_plotter/js/plotly-latest.min.js' %}"></script>
+
+<!-- THESE ARE FOR GOOGLE PLOT-->
+<!-- WILL DEPRECATE ONCE PLOTLY IS STABLE
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+-->
 <script type="text/javascript">
+
+/*
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawRegenChart);
   google.charts.setOnLoadCallback(drawEmbryoChart);
@@ -236,7 +242,7 @@
 
     embryo_plot.draw(data, options_lines);
   }
-
+*/
 </script>
 
 {% endblock head %}
@@ -257,10 +263,18 @@
     <div class="tab-content">
       <div id="Plots" class="tab-pane fade in active">
         <h3>Plots</h3>
+        <div id='regenPlotWrapper'>
+          <div id="regenPlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+        </div>
+        <div id='embryoPlotWrapper'>
+          <div id="embryoPlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+        </div>
+        <!--
         <div id="regen_plot_div" style="width: 95%; height: 700px;"></div>
         <div id='pngRegen'></div>
         <div id="embryo_plot_div" style="width: 95%; height: 700px;"></div>
         <div id='pngEmbryo'></div>
+        -->
       </div>
       <div id="Count_table" class="tab-pane fade">
         <h3>Count tables</h3>
@@ -1061,27 +1075,1440 @@
 {% endblock content %}
 
 {% block js %}
+<!-- This script is the show hide for annotation table 'extra hits'-->
 <script type="text/javascript">
 $("body").on("click", ".clickable",function(){
-	$(this).next().toggle();
+	$(this).next().toggle('swing');
 });
 </script>
-<!-- This is the old show/hide script
+
+<!-- This monster is the plotly script-->
 <script type="text/javascript">
-$(function() {
-    $("td[colspan=1]").find("p").hide();
-    $("td[colspan=9]").find("p").hide();
-    $("table").click(function(event) {
-        event.stopPropagation();
-        var $target = $(event.target);
-        if ( $target.closest("td").attr("colspan") < 2 ) {
-            $target.closest("tr").next().find("p").slideToggle();
-        } else {
-            $target.closest("tr").next().find("p").slideToggle();
-        }                    
-    });
-});
+
+var regenData = []
+
+// helper function to make the labels
+makeRegenLabels = function(x,y){
+  var len = x.length;
+  var i = 0;
+  var text = [];
+  for (; i < len; ) {
+    var out = x[i] +'hpa <br>'+ y[i];
+    text.push(out);
+    i++;
+
+  }
+  return text;
+}
+
+// helper function to make the trace
+makeRegenTrace = function(x,y,name,errorPlus,errorMinus,text,color){
+    var trace = {
+      x:x,
+      y:y,
+      name: name,
+      error_y: {
+        type: 'data',
+        symmetric: false,
+        array: errorPlus,
+        arrayminus: errorMinus,
+        width: 0,
+        thickness: 1,
+      },
+     type: 'scatter',
+     line: {
+       width: 1.5,
+       color: color,
+     },
+     text: text,
+     hoverinfo: 'text+name'      
+  };
+  return(trace);
+}
+
+{% if nvertx_1 %}
+  var color = 'rgb(31, 119, 180)'
+  // Pull the data
+  var x = [-2,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144];
+  var y = [{{ regen_UC_1 }}, 
+      {{ regen_0_1 }}, 
+      {{ regen_2_1 }}, 
+      {{ regen_4_1 }},
+      {{ regen_8_1 }},
+      {{ regen_12_1 }},
+      {{ regen_16_1 }},
+      {{ regen_20_1 }},
+      {{ regen_24_1 }},
+      {{ regen_36_1 }},
+      {{ regen_48_1 }},
+      {{ regen_60_1 }},
+      {{ regen_72_1 }},
+      {{ regen_96_1 }},
+      {{ regen_120_1 }},
+      {{ regen_144_1 }}];
+  var errorPlus = [{{regen_se_UC_1}},
+        {{regen_se_0_1}},
+        {{regen_se_2_1}},
+        {{regen_se_4_1}},
+        {{regen_se_8_1}},
+        {{regen_se_12_1}},
+        {{regen_se_16_1}},
+        {{regen_se_20_1}},
+        {{regen_se_24_1}},
+        {{regen_se_36_1}},
+        {{regen_se_48_1}},
+        {{regen_se_60_1}},
+        {{regen_se_72_1}},
+        {{regen_se_96_1}},
+        {{regen_se_120_1}},
+        {{regen_se_144_1}}];
+  var errorMinus = [{{regen_se_UC_1}},
+        {{regen_se_0_1}},
+        {{regen_se_2_1}},
+        {{regen_se_4_1}},
+        {{regen_se_8_1}},
+        {{regen_se_12_1}},
+        {{regen_se_16_1}},
+        {{regen_se_20_1}},
+        {{regen_se_24_1}},
+        {{regen_se_36_1}},
+        {{regen_se_48_1}},
+        {{regen_se_60_1}},
+        {{regen_se_72_1}},
+        {{regen_se_96_1}},
+        {{regen_se_120_1}},
+        {{regen_se_144_1}}];
+  
+  //makes the hover labels
+  var text = makeRegenLabels(x,y);
+  
+  //name of the trace
+  var name = '{{ nvertx_1 }}{% if not nvertx_1_regen_invalid %}{% if not nvertx_1_annot_invalid %}<br>{{ nr_hit_graph_1 }}{% else %}<br>No annotations{% endif %}{% else %}<br>NO DATA{% endif %}'
+  
+  var trace1 = makeRegenTrace(x,y,name,errorPlus,errorMinus,text,color);
+  
+  regenData.push( trace1 )
+{% endif %};
+
+{% if nvertx_2 %}
+  var color= 'rgb(255, 127, 14)'
+  // Pull the data
+  var x = [-2,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144];
+  var y = [{{ regen_UC_2 }}, 
+      {{ regen_0_2 }}, 
+      {{ regen_2_2 }}, 
+      {{ regen_4_2 }},
+      {{ regen_8_2 }},
+      {{ regen_12_2 }},
+      {{ regen_16_2 }},
+      {{ regen_20_2 }},
+      {{ regen_24_2 }},
+      {{ regen_36_2 }},
+      {{ regen_48_2 }},
+      {{ regen_60_2 }},
+      {{ regen_72_2 }},
+      {{ regen_96_2 }},
+      {{ regen_120_2 }},
+      {{ regen_144_2 }}];
+  var errorPlus = [{{regen_se_UC_2}},
+        {{regen_se_0_2}},
+        {{regen_se_2_2}},
+        {{regen_se_4_2}},
+        {{regen_se_8_2}},
+        {{regen_se_12_2}},
+        {{regen_se_16_2}},
+        {{regen_se_20_2}},
+        {{regen_se_24_2}},
+        {{regen_se_36_2}},
+        {{regen_se_48_2}},
+        {{regen_se_60_2}},
+        {{regen_se_72_2}},
+        {{regen_se_96_2}},
+        {{regen_se_120_2}},
+        {{regen_se_144_2}}];
+  var errorMinus = [{{regen_se_UC_2}},
+        {{regen_se_0_2}},
+        {{regen_se_2_2}},
+        {{regen_se_4_2}},
+        {{regen_se_8_2}},
+        {{regen_se_12_2}},
+        {{regen_se_16_2}},
+        {{regen_se_20_2}},
+        {{regen_se_24_2}},
+        {{regen_se_36_2}},
+        {{regen_se_48_2}},
+        {{regen_se_60_2}},
+        {{regen_se_72_2}},
+        {{regen_se_96_2}},
+        {{regen_se_120_2}},
+        {{regen_se_144_2}}];
+  
+  //makes the hover labels
+  var text = makeRegenLabels(x,y);
+  
+  //name of the trace
+  var name = '{{ nvertx_2 }}{% if not nvertx_2_regen_invalid %}{% if not nvertx_2_annot_invalid %}<br>{{ nr_hit_graph_2 }}{% else %}<br>No annotations{% endif %}{% else %}<br>NO DATA{% endif %}'
+  
+  var trace2 = makeRegenTrace(x,y,name,errorPlus,errorMinus,text,color);
+  
+  regenData.push( trace2 )
+{% endif %};
+
+{% if nvertx_3 %} 
+  var color= 'rgb(44, 160, 44)'
+  // Pull the data
+  var x = [-2,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144];
+  var y = [{{ regen_UC_3 }}, 
+      {{ regen_0_3 }}, 
+      {{ regen_2_3 }}, 
+      {{ regen_4_3 }},
+      {{ regen_8_3 }},
+      {{ regen_12_3 }},
+      {{ regen_16_3 }},
+      {{ regen_20_3 }},
+      {{ regen_24_3 }},
+      {{ regen_36_3 }},
+      {{ regen_48_3 }},
+      {{ regen_60_3 }},
+      {{ regen_72_3 }},
+      {{ regen_96_3 }},
+      {{ regen_120_3 }},
+      {{ regen_144_3 }}];
+  var errorPlus = [{{regen_se_UC_3}},
+        {{regen_se_0_3}},
+        {{regen_se_2_3}},
+        {{regen_se_4_3}},
+        {{regen_se_8_3}},
+        {{regen_se_12_3}},
+        {{regen_se_16_3}},
+        {{regen_se_20_3}},
+        {{regen_se_24_3}},
+        {{regen_se_36_3}},
+        {{regen_se_48_3}},
+        {{regen_se_60_3}},
+        {{regen_se_72_3}},
+        {{regen_se_96_3}},
+        {{regen_se_120_3}},
+        {{regen_se_144_3}}];
+  var errorMinus = [{{regen_se_UC_3}},
+        {{regen_se_0_3}},
+        {{regen_se_2_3}},
+        {{regen_se_4_3}},
+        {{regen_se_8_3}},
+        {{regen_se_12_3}},
+        {{regen_se_16_3}},
+        {{regen_se_20_3}},
+        {{regen_se_24_3}},
+        {{regen_se_36_3}},
+        {{regen_se_48_3}},
+        {{regen_se_60_3}},
+        {{regen_se_72_3}},
+        {{regen_se_96_3}},
+        {{regen_se_120_3}},
+        {{regen_se_144_3}}];
+  
+  //makes the hover labels
+  var text = makeRegenLabels(x,y);
+  
+  //name of the trace
+  var name = '{{ nvertx_3 }}{% if not nvertx_3_regen_invalid %}{% if not nvertx_3_annot_invalid %}<br>{{ nr_hit_graph_3 }}{% else %}<br>No annotations{% endif %}{% else %}<br>NO DATA{% endif %}'
+  
+  var trace3 = makeRegenTrace(x,y,name,errorPlus,errorMinus,text,color);
+  
+  regenData.push( trace3 )
+{% endif %};
+
+{% if nvertx_4 %}
+  // Pull the data
+  var color = 'rgb(214, 39, 40)'
+  var x = [-2,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144];
+  var y = [{{ regen_UC_4 }}, 
+      {{ regen_0_4 }}, 
+      {{ regen_2_4 }}, 
+      {{ regen_4_4 }},
+      {{ regen_8_4 }},
+      {{ regen_12_4 }},
+      {{ regen_16_4 }},
+      {{ regen_20_4 }},
+      {{ regen_24_4 }},
+      {{ regen_36_4 }},
+      {{ regen_48_4 }},
+      {{ regen_60_4 }},
+      {{ regen_72_4 }},
+      {{ regen_96_4 }},
+      {{ regen_120_4 }},
+      {{ regen_144_4 }}];
+  var errorPlus = [{{regen_se_UC_4}},
+        {{regen_se_0_4}},
+        {{regen_se_2_4}},
+        {{regen_se_4_4}},
+        {{regen_se_8_4}},
+        {{regen_se_12_4}},
+        {{regen_se_16_4}},
+        {{regen_se_20_4}},
+        {{regen_se_24_4}},
+        {{regen_se_36_4}},
+        {{regen_se_48_4}},
+        {{regen_se_60_4}},
+        {{regen_se_72_4}},
+        {{regen_se_96_4}},
+        {{regen_se_120_4}},
+        {{regen_se_144_4}}];
+  var errorMinus = [{{regen_se_UC_4}},
+        {{regen_se_0_4}},
+        {{regen_se_2_4}},
+        {{regen_se_4_4}},
+        {{regen_se_8_4}},
+        {{regen_se_12_4}},
+        {{regen_se_16_4}},
+        {{regen_se_20_4}},
+        {{regen_se_24_4}},
+        {{regen_se_36_4}},
+        {{regen_se_48_4}},
+        {{regen_se_60_4}},
+        {{regen_se_72_4}},
+        {{regen_se_96_4}},
+        {{regen_se_120_4}},
+        {{regen_se_144_4}}];
+  
+  //makes the hover labels
+  var text = makeRegenLabels(x,y);
+  
+  //name of the trace
+  var name = '{{ nvertx_4 }}{% if not nvertx_4_regen_invalid %}{% if not nvertx_4_annot_invalid %}<br>{{ nr_hit_graph_4 }}{% else %}<br>No annotations{% endif %}{% else %}<br>NO DATA{% endif %}'
+  
+  var trace4 = makeRegenTrace(x,y,name,errorPlus,errorMinus,text,color);
+  
+  regenData.push( trace4 )
+{% endif %};
+
+{% if nvertx_5 %}
+  var color = 'rgb(148, 103, 189)'
+  // Pull the data
+  var x = [-2,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144];
+  var y = [{{ regen_UC_5 }}, 
+      {{ regen_0_5 }}, 
+      {{ regen_2_5 }}, 
+      {{ regen_4_5 }},
+      {{ regen_8_5 }},
+      {{ regen_12_5 }},
+      {{ regen_16_5 }},
+      {{ regen_20_5 }},
+      {{ regen_24_5 }},
+      {{ regen_36_5 }},
+      {{ regen_48_5 }},
+      {{ regen_60_5 }},
+      {{ regen_72_5 }},
+      {{ regen_96_5 }},
+      {{ regen_120_5 }},
+      {{ regen_144_5 }}];
+  var errorPlus = [{{regen_se_UC_5}},
+        {{regen_se_0_5}},
+        {{regen_se_2_5}},
+        {{regen_se_4_5}},
+        {{regen_se_8_5}},
+        {{regen_se_12_5}},
+        {{regen_se_16_5}},
+        {{regen_se_20_5}},
+        {{regen_se_24_5}},
+        {{regen_se_36_5}},
+        {{regen_se_48_5}},
+        {{regen_se_60_5}},
+        {{regen_se_72_5}},
+        {{regen_se_96_5}},
+        {{regen_se_120_5}},
+        {{regen_se_144_5}}];
+  var errorMinus = [{{regen_se_UC_5}},
+        {{regen_se_0_5}},
+        {{regen_se_2_5}},
+        {{regen_se_4_5}},
+        {{regen_se_8_5}},
+        {{regen_se_12_5}},
+        {{regen_se_16_5}},
+        {{regen_se_20_5}},
+        {{regen_se_24_5}},
+        {{regen_se_36_5}},
+        {{regen_se_48_5}},
+        {{regen_se_60_5}},
+        {{regen_se_72_5}},
+        {{regen_se_96_5}},
+        {{regen_se_120_5}},
+        {{regen_se_144_5}}];
+  
+  //makes the hover labels
+  var text = makeRegenLabels(x,y);
+  
+  //name of the trace
+  var name = '{{ nvertx_5 }}{% if not nvertx_5_regen_invalid %}{% if not nvertx_5_annot_invalid %}<br>{{ nr_hit_graph_5 }}{% else %}<br>No annotations{% endif %}{% else %}<br>NO DATA{% endif %}'
+  
+  var trace5 = makeRegenTrace(x,y,name,errorPlus,errorMinus,text,color);
+  
+  regenData.push( trace5 )
+
+{% endif %};
+
+var regenContainer = document.getElementById( "regenPlotWrapper" );
+
+var regenLayout = {
+  title: 'Regeneration Expression',
+  xaxis: {
+    title: 'hours post amputation',
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  yaxis: {
+    title: {% if not log2 %}'log2(counts per million + 1)'{% else %}'counts per million'{% endif %},
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  width: regenContainer.offsetWidth,
+  height: regenContainer.offsetHeight,
+  hovermode:'closest',
+  showlegend: true
+};
+
+Plotly.plot('regenPlot', regenData, regenLayout, {
+  modeBarButtonsToRemove: ['toImage', 'sendDataToCloud','lasso2d','toggleSpikelines'],
+  modeBarButtonsToAdd: [{
+    name: 'Download',
+    icon: Plotly.Icons.camera,
+    click: function(gd) {
+      Plotly.downloadImage(gd)
+    }
+  }]
+})
+
+/*
+
+  EMBRYO PLOT
+
+*/
+
+var embryoData = [];
+
+// helper function to make the trace
+makeEmbryoMeanTrace = function(x,y,name,color){
+    var trace = {
+      x:x,
+      y:y,
+      name: name,
+      mode: 'lines',
+      line : {
+        color:color,
+        width: 1.5
+      },
+      hoverinfo: 'text+name' 
+  };
+  return(trace);
+};
+
+// these markers don't change so they go here:
+var helmSymbol='triangle-up';
+var fischerSymbol='circle';
+var warnerSymbol = 'square';
+
+// helper function to make the dot trace
+makeEmbryoDotTrace = function(x,y,name,errorPlus,errorMinus,text,color,symbol){
+    var trace = {
+      x:x,
+      y:y,
+      name: name,
+      mode: 'lines',
+      hoverinfo: 'text+name',
+      error_y: {
+        type: 'data',
+        symmetric: false,
+        array: errorPlus,
+        arrayminus: errorMinus,
+        width: 0,
+        thickness:1,
+        color: color
+      },
+      mode: 'markers',
+      marker : {
+        color:color,
+        symbol: symbol
+      },
+      text: text,
+      hoverinfo: 'text+name' ,
+      showlegend: false     
+    }; 
+  return(trace);
+};
+
+makeEmbryoLabels = function(dataset,X,Y){
+  var len = x.length;
+  var i = 0;
+  var text = [];
+  for (; i < len; ) {
+    var out = dataset+' '+ X[i] +'hpf <br>'+ Y[i];
+    text.push(out);
+    i++;
+
+  }
+  return text;
+}
+
+
+{% if nvertx_1 %}
+  var color = 'rgb(31, 119, 180)'
+  
+  // Pull the data
+  var meanX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,48,72,96,120,144,168,192,240];
+  var meanY = [{{ embryo_mean_0_1 }}, 
+      {{ embryo_mean_1_1 }}, 
+      {{ embryo_mean_2_1 }},
+      {{ embryo_mean_3_1 }},
+      {{ embryo_mean_4_1 }},
+      {{ embryo_mean_5_1 }},
+      {{ embryo_mean_6_1 }},
+      {{ embryo_mean_7_1 }}, 
+      {{ embryo_mean_8_1 }},
+      {{ embryo_mean_9_1 }},
+      {{ embryo_mean_10_1 }},
+      {{ embryo_mean_11_1 }},
+      {{ embryo_mean_12_1 }},
+      {{ embryo_mean_13_1 }},
+      {{ embryo_mean_14_1 }},
+      {{ embryo_mean_15_1 }},
+      {{ embryo_mean_16_1 }},
+      {{ embryo_mean_17_1 }},
+      {{ embryo_mean_18_1 }},
+      {{ embryo_mean_19_1 }},
+      {{ embryo_mean_24_1 }},
+      {{ embryo_mean_48_1 }},
+      {{ embryo_mean_72_1 }},
+      {{ embryo_mean_96_1 }},
+      {{ embryo_mean_120_1 }},
+      {{ embryo_mean_144_1 }},
+      {{ embryo_mean_168_1 }},
+      {{ embryo_mean_192_1 }},
+      {{ embryo_mean_240_1 }}];
+  
+  //name trace
+  var meanName = '{{ nvertx_1 }}{% if not nvertx_1_annot_invalid %}<br>{{ nr_hit_graph_1 }}{% else %}<br>No annotations{% endif %}'
+    
+  var meanTrace1 = makeEmbryoMeanTrace(meanX,meanY,meanName,color);
+  
+  //add the mean data
+  embryoData.push( meanTrace1 )
+ 
+  //start with the Fischer data
+  var fischerX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+
+  var fischerY = [{{ embryo_fischer_0_1 }},
+    {{ embryo_fischer_1_1 }},
+    {{ embryo_fischer_2_1 }},
+    {{ embryo_fischer_3_1 }},
+    {{ embryo_fischer_4_1 }},
+    {{ embryo_fischer_5_1 }},
+    {{ embryo_fischer_6_1 }},
+    {{ embryo_fischer_7_1 }},
+    {{ embryo_fischer_8_1 }},
+    {{ embryo_fischer_9_1 }},
+    {{ embryo_fischer_10_1 }},
+    {{ embryo_fischer_11_1 }},
+    {{ embryo_fischer_12_1 }},
+    {{ embryo_fischer_13_1 }},
+    {{ embryo_fischer_14_1 }},
+    {{ embryo_fischer_15_1 }},
+    {{ embryo_fischer_16_1 }},
+    {{ embryo_fischer_17_1 }},
+    {{ embryo_fischer_18_1 }},
+    {{ embryo_fischer_19_1 }}];
+
+  var fischerErrorPlus = [{{embryo_fischer_se_0_1}},
+    {{embryo_fischer_se_1_1}},
+    {{embryo_fischer_se_2_1}},
+    {{embryo_fischer_se_3_1}},
+    {{embryo_fischer_se_4_1}},
+    {{embryo_fischer_se_5_1}},
+    {{embryo_fischer_se_6_1}},
+    {{embryo_fischer_se_7_1}},
+    {{embryo_fischer_se_8_1}},
+    {{embryo_fischer_se_9_1}},
+    ,
+    {{embryo_fischer_se_11_1}},
+    {{embryo_fischer_se_12_1}},
+    {{embryo_fischer_se_13_1}},
+    {{embryo_fischer_se_14_1}},
+    {{embryo_fischer_se_15_1}},
+    {{embryo_fischer_se_16_1}},
+    {{embryo_fischer_se_17_1}},
+    {{embryo_fischer_se_18_1}},
+    {{embryo_fischer_se_19_1}}];
+
+
+  var fischerErrorMinus = [{{embryo_fischer_se_0_1}},
+    {{embryo_fischer_se_1_1}},
+    {{embryo_fischer_se_2_1}},
+    {{embryo_fischer_se_3_1}},
+    {{embryo_fischer_se_4_1}},
+    {{embryo_fischer_se_5_1}},
+    {{embryo_fischer_se_6_1}},
+    {{embryo_fischer_se_7_1}},
+    {{embryo_fischer_se_8_1}},
+    {{embryo_fischer_se_9_1}},
+    ,
+    {{embryo_fischer_se_11_1}},
+    {{embryo_fischer_se_12_1}},
+    {{embryo_fischer_se_13_1}},
+    {{embryo_fischer_se_14_1}},
+    {{embryo_fischer_se_15_1}},
+    {{embryo_fischer_se_16_1}},
+    {{embryo_fischer_se_17_1}},
+    {{embryo_fischer_se_18_1}},
+    {{embryo_fischer_se_19_1}}]
+   
+  var fischerText = makeEmbryoLabels('FISCHER',fischerX,fischerY);
+  var fischerName = '';
+  
+  var fischerTrace1 = makeEmbryoDotTrace(fischerX,fischerY,fischerName,fischerErrorPlus,fischerErrorMinus,fischerText,color,fischerSymbol)
+  embryoData.push( fischerTrace1 )
+  
+  //warner data
+  var warnerX = [24,48,72,96,120,144,168,192]
+
+  var warnerY = [{{ embryo_warner_24_1 }},
+    {{ embryo_warner_48_1 }},
+    {{ embryo_warner_72_1 }},
+    {{ embryo_warner_96_1 }},
+    {{ embryo_warner_120_1 }},
+    {{ embryo_warner_144_1 }},
+    {{ embryo_warner_168_1 }},
+    {{ embryo_warner_192_1 }}];
+
+  var warnerErrorPlus = [{{embryo_warner_se_24_1}},
+    {{embryo_warner_se_48_1}},
+    {{embryo_warner_se_72_1}},
+    {{embryo_warner_se_96_1}},
+    {{embryo_warner_se_120_1}},
+    {{embryo_warner_se_144_1}},
+    {{embryo_warner_se_168_1}},
+    {{embryo_warner_se_192_1}}];
+
+
+  var warnerErrorMinus = [{{embryo_warner_se_24_1}},
+    {{embryo_warner_se_48_1}},
+    {{embryo_warner_se_72_1}},
+    {{embryo_warner_se_96_1}},
+    {{embryo_warner_se_120_1}},
+    {{embryo_warner_se_144_1}},
+    {{embryo_warner_se_168_1}},
+    {{embryo_warner_se_192_1}}]
+   
+  var warnerText = makeEmbryoLabels('WARNER',warnerX,warnerY);
+  var warnerName = '';
+ 
+  var warnerTrace1 = makeEmbryoDotTrace(warnerX,warnerY,warnerName,warnerErrorPlus,warnerErrorMinus,warnerText,color,warnerSymbol)
+  embryoData.push( warnerTrace1 )
+  
+  //HELM data
+  var helmX = [2,7,12,24,120,240]
+
+  var helmY = [{{ embryo_helm_2_1 }},
+    {{ embryo_helm_7_1 }},
+    {{ embryo_helm_12_1 }},
+    {{ embryo_helm_24_1 }},
+    {{ embryo_helm_120_1 }},
+    {{ embryo_helm_240_1 }}];
+
+  var helmErrorPlus = [{{embryo_helm_se_2_1}},
+    {{embryo_helm_se_7_1}},
+    {{embryo_helm_se_12_1}},
+    {{embryo_helm_se_24_1}},
+    {{embryo_helm_se_120_1}},
+    {{embryo_helm_se_240_1}}];
+
+  var helmErrorMinus = [{{embryo_helm_se_2_1}},
+    {{embryo_helm_se_7_1}},
+    {{embryo_helm_se_12_1}},
+    {{embryo_helm_se_24_1}},
+    {{embryo_helm_se_120_1}},
+    {{embryo_helm_se_240_1}}]
+   
+  var helmText = makeEmbryoLabels('HELM',helmX,helmY);
+  var helmName = '';
+ 
+  var helmTrace1 = makeEmbryoDotTrace(helmX,helmY,helmName,helmErrorPlus,helmErrorMinus,helmText,color,helmSymbol)
+  embryoData.push( helmTrace1 )
+  
+{% endif %};
+{% if nvertx_2 %}
+  var color= 'rgb(255, 127, 14)'
+  
+  // Pull the data
+  var meanX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,48,72,96,120,144,168,192,240];
+  var meanY = [{{ embryo_mean_0_2 }}, 
+      {{ embryo_mean_1_2 }}, 
+      {{ embryo_mean_2_2 }},
+      {{ embryo_mean_3_2 }},
+      {{ embryo_mean_4_2 }},
+      {{ embryo_mean_5_2 }},
+      {{ embryo_mean_6_2 }},
+      {{ embryo_mean_7_2 }}, 
+      {{ embryo_mean_8_2 }},
+      {{ embryo_mean_9_2 }},
+      {{ embryo_mean_10_2 }},
+      {{ embryo_mean_11_2 }},
+      {{ embryo_mean_12_2 }},
+      {{ embryo_mean_13_2 }},
+      {{ embryo_mean_14_2 }},
+      {{ embryo_mean_15_2 }},
+      {{ embryo_mean_16_2 }},
+      {{ embryo_mean_17_2 }},
+      {{ embryo_mean_18_2 }},
+      {{ embryo_mean_19_2 }},
+      {{ embryo_mean_24_2 }},
+      {{ embryo_mean_48_2 }},
+      {{ embryo_mean_72_2 }},
+      {{ embryo_mean_96_2 }},
+      {{ embryo_mean_120_2 }},
+      {{ embryo_mean_144_2 }},
+      {{ embryo_mean_168_2 }},
+      {{ embryo_mean_192_2 }},
+      {{ embryo_mean_240_2 }}];
+  
+  //name trace
+  var meanName = '{{ nvertx_2 }}{% if not nvertx_2_annot_invalid %}<br>{{ nr_hit_graph_2 }}{% else %}<br>No annotations{% endif %}'
+    
+  var meanTrace2 = makeEmbryoMeanTrace(meanX,meanY,meanName,color);
+  
+  //add the mean data
+  embryoData.push( meanTrace2 )
+ 
+  //start with the Fischer data
+  var fischerX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+
+  var fischerY = [{{ embryo_fischer_0_2 }},
+    {{ embryo_fischer_1_2 }},
+    {{ embryo_fischer_2_2 }},
+    {{ embryo_fischer_3_2 }},
+    {{ embryo_fischer_4_2 }},
+    {{ embryo_fischer_5_2 }},
+    {{ embryo_fischer_6_2 }},
+    {{ embryo_fischer_7_2 }},
+    {{ embryo_fischer_8_2 }},
+    {{ embryo_fischer_9_2 }},
+    {{ embryo_fischer_10_2 }},
+    {{ embryo_fischer_11_2 }},
+    {{ embryo_fischer_12_2 }},
+    {{ embryo_fischer_13_2 }},
+    {{ embryo_fischer_14_2 }},
+    {{ embryo_fischer_15_2 }},
+    {{ embryo_fischer_16_2 }},
+    {{ embryo_fischer_17_2 }},
+    {{ embryo_fischer_18_2 }},
+    {{ embryo_fischer_19_2 }}];
+
+  var fischerErrorPlus = [{{embryo_fischer_se_0_2}},
+    {{embryo_fischer_se_1_2}},
+    {{embryo_fischer_se_2_2}},
+    {{embryo_fischer_se_3_2}},
+    {{embryo_fischer_se_4_2}},
+    {{embryo_fischer_se_5_2}},
+    {{embryo_fischer_se_6_2}},
+    {{embryo_fischer_se_7_2}},
+    {{embryo_fischer_se_8_2}},
+    {{embryo_fischer_se_9_2}},
+    ,
+    {{embryo_fischer_se_11_2}},
+    {{embryo_fischer_se_12_2}},
+    {{embryo_fischer_se_13_2}},
+    {{embryo_fischer_se_14_2}},
+    {{embryo_fischer_se_15_2}},
+    {{embryo_fischer_se_16_2}},
+    {{embryo_fischer_se_17_2}},
+    {{embryo_fischer_se_18_2}},
+    {{embryo_fischer_se_19_2}}];
+
+
+  var fischerErrorMinus = [{{embryo_fischer_se_0_2}},
+    {{embryo_fischer_se_1_2}},
+    {{embryo_fischer_se_2_2}},
+    {{embryo_fischer_se_3_2}},
+    {{embryo_fischer_se_4_2}},
+    {{embryo_fischer_se_5_2}},
+    {{embryo_fischer_se_6_2}},
+    {{embryo_fischer_se_7_2}},
+    {{embryo_fischer_se_8_2}},
+    {{embryo_fischer_se_9_2}},
+    ,
+    {{embryo_fischer_se_11_2}},
+    {{embryo_fischer_se_12_2}},
+    {{embryo_fischer_se_13_2}},
+    {{embryo_fischer_se_14_2}},
+    {{embryo_fischer_se_15_2}},
+    {{embryo_fischer_se_16_2}},
+    {{embryo_fischer_se_17_2}},
+    {{embryo_fischer_se_18_2}},
+    {{embryo_fischer_se_19_2}}]
+   
+  var fischerText = makeEmbryoLabels('FISCHER',fischerX,fischerY);
+  var fischerName = '';
+ 
+  var fischerTrace2 = makeEmbryoDotTrace(fischerX,fischerY,fischerName,fischerErrorPlus,fischerErrorMinus,fischerText,color,fischerSymbol)
+  embryoData.push( fischerTrace2 )
+  
+  //warner data
+  var warnerX = [24,48,72,96,120,144,168,192]
+
+  var warnerY = [{{ embryo_warner_24_2 }},
+    {{ embryo_warner_48_2 }},
+    {{ embryo_warner_72_2 }},
+    {{ embryo_warner_96_2 }},
+    {{ embryo_warner_120_2 }},
+    {{ embryo_warner_144_2 }},
+    {{ embryo_warner_168_2 }},
+    {{ embryo_warner_192_2 }}];
+
+  var warnerErrorPlus = [{{embryo_warner_se_24_2}},
+    {{embryo_warner_se_48_2}},
+    {{embryo_warner_se_72_2}},
+    {{embryo_warner_se_96_2}},
+    {{embryo_warner_se_120_2}},
+    {{embryo_warner_se_144_2}},
+    {{embryo_warner_se_168_2}},
+    {{embryo_warner_se_192_2}}];
+
+  var warnerErrorMinus = [{{embryo_warner_se_24_2}},
+    {{embryo_warner_se_48_2}},
+    {{embryo_warner_se_72_2}},
+    {{embryo_warner_se_96_2}},
+    {{embryo_warner_se_120_2}},
+    {{embryo_warner_se_144_2}},
+    {{embryo_warner_se_168_2}},
+    {{embryo_warner_se_192_2}}]
+   
+  var warnerText = makeEmbryoLabels('WARNER',warnerX,warnerY);
+  var warnerName = '';
+ 
+  var warnerTrace2 = makeEmbryoDotTrace(warnerX,warnerY,warnerName,warnerErrorPlus,warnerErrorMinus,warnerText,color,warnerSymbol)
+  embryoData.push( warnerTrace2 )
+  
+  //HELM data
+  var helmX = [2,7,12,24,120,240]
+
+  var helmY = [{{ embryo_helm_2_2 }},
+    {{ embryo_helm_7_2 }},
+    {{ embryo_helm_12_2 }},
+    {{ embryo_helm_24_2 }},
+    {{ embryo_helm_120_2 }},
+    {{ embryo_helm_240_2 }}];
+
+  var helmErrorPlus = [{{embryo_helm_se_2_2}},
+    {{embryo_helm_se_7_2}},
+    {{embryo_helm_se_12_2}},
+    {{embryo_helm_se_24_2}},
+    {{embryo_helm_se_120_2}},
+    {{embryo_helm_se_240_2}}];
+
+  var helmErrorMinus = [{{embryo_helm_se_2_2}},
+    {{embryo_helm_se_7_2}},
+    {{embryo_helm_se_12_2}},
+    {{embryo_helm_se_24_2}},
+    {{embryo_helm_se_120_2}},
+    {{embryo_helm_se_240_2}}]
+   
+  var helmText = makeEmbryoLabels('HELM',helmX,helmY);
+  var helmName = '';
+ 
+  var helmTrace2 = makeEmbryoDotTrace(helmX,helmY,helmName,helmErrorPlus,helmErrorMinus,helmText,color,helmSymbol)
+  embryoData.push( helmTrace2 )
+  
+{% endif %};
+{% if nvertx_3 %}
+  var color= 'rgb(44, 160, 44)'
+  
+  // Pull the data
+  var meanX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,48,72,96,120,144,168,192,240];
+  var meanY = [{{ embryo_mean_0_3 }}, 
+      {{ embryo_mean_1_3 }}, 
+      {{ embryo_mean_2_3 }},
+      {{ embryo_mean_3_3 }},
+      {{ embryo_mean_4_3 }},
+      {{ embryo_mean_5_3 }},
+      {{ embryo_mean_6_3 }},
+      {{ embryo_mean_7_3 }}, 
+      {{ embryo_mean_8_3 }},
+      {{ embryo_mean_9_3 }},
+      {{ embryo_mean_10_3 }},
+      {{ embryo_mean_11_3 }},
+      {{ embryo_mean_12_3 }},
+      {{ embryo_mean_13_3 }},
+      {{ embryo_mean_14_3 }},
+      {{ embryo_mean_15_3 }},
+      {{ embryo_mean_16_3 }},
+      {{ embryo_mean_17_3 }},
+      {{ embryo_mean_18_3 }},
+      {{ embryo_mean_19_3 }},
+      {{ embryo_mean_24_3 }},
+      {{ embryo_mean_48_3 }},
+      {{ embryo_mean_72_3 }},
+      {{ embryo_mean_96_3 }},
+      {{ embryo_mean_120_3 }},
+      {{ embryo_mean_144_3 }},
+      {{ embryo_mean_168_3 }},
+      {{ embryo_mean_192_3 }},
+      {{ embryo_mean_240_3 }}];
+  
+  //name trace
+  var meanName = '{{ nvertx_3 }}{% if not nvertx_3_annot_invalid %}<br>{{ nr_hit_graph_3 }}{% else %}<br>No annotations{% endif %}'
+    
+  var meanTrace3 = makeEmbryoMeanTrace(meanX,meanY,meanName,color);
+  
+  //add the mean data
+  embryoData.push( meanTrace3 )
+ 
+  //start with the Fischer data
+  var fischerX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+
+  var fischerY = [{{ embryo_fischer_0_3 }},
+    {{ embryo_fischer_1_3 }},
+    {{ embryo_fischer_2_3 }},
+    {{ embryo_fischer_3_3 }},
+    {{ embryo_fischer_4_3 }},
+    {{ embryo_fischer_5_3 }},
+    {{ embryo_fischer_6_3 }},
+    {{ embryo_fischer_7_3 }},
+    {{ embryo_fischer_8_3 }},
+    {{ embryo_fischer_9_3 }},
+    {{ embryo_fischer_10_3 }},
+    {{ embryo_fischer_11_3 }},
+    {{ embryo_fischer_12_3 }},
+    {{ embryo_fischer_13_3 }},
+    {{ embryo_fischer_14_3 }},
+    {{ embryo_fischer_15_3 }},
+    {{ embryo_fischer_16_3 }},
+    {{ embryo_fischer_17_3 }},
+    {{ embryo_fischer_18_3 }},
+    {{ embryo_fischer_19_3 }}];
+
+  var fischerErrorPlus = [{{embryo_fischer_se_0_3}},
+    {{embryo_fischer_se_1_3}},
+    {{embryo_fischer_se_2_3}},
+    {{embryo_fischer_se_3_3}},
+    {{embryo_fischer_se_4_3}},
+    {{embryo_fischer_se_5_3}},
+    {{embryo_fischer_se_6_3}},
+    {{embryo_fischer_se_7_3}},
+    {{embryo_fischer_se_8_3}},
+    {{embryo_fischer_se_9_3}},
+    ,
+    {{embryo_fischer_se_11_3}},
+    {{embryo_fischer_se_12_3}},
+    {{embryo_fischer_se_13_3}},
+    {{embryo_fischer_se_14_3}},
+    {{embryo_fischer_se_15_3}},
+    {{embryo_fischer_se_16_3}},
+    {{embryo_fischer_se_17_3}},
+    {{embryo_fischer_se_18_3}},
+    {{embryo_fischer_se_19_3}}];
+
+
+  var fischerErrorMinus = [{{embryo_fischer_se_0_3}},
+    {{embryo_fischer_se_1_3}},
+    {{embryo_fischer_se_2_3}},
+    {{embryo_fischer_se_3_3}},
+    {{embryo_fischer_se_4_3}},
+    {{embryo_fischer_se_5_3}},
+    {{embryo_fischer_se_6_3}},
+    {{embryo_fischer_se_7_3}},
+    {{embryo_fischer_se_8_3}},
+    {{embryo_fischer_se_9_3}},
+    ,
+    {{embryo_fischer_se_11_3}},
+    {{embryo_fischer_se_12_3}},
+    {{embryo_fischer_se_13_3}},
+    {{embryo_fischer_se_14_3}},
+    {{embryo_fischer_se_15_3}},
+    {{embryo_fischer_se_16_3}},
+    {{embryo_fischer_se_17_3}},
+    {{embryo_fischer_se_18_3}},
+    {{embryo_fischer_se_19_3}}]
+   
+  var fischerText = makeEmbryoLabels('FISCHER',fischerX,fischerY);
+  var fischerName = '';
+ 
+  var fischerTrace3 = makeEmbryoDotTrace(fischerX,fischerY,fischerName,fischerErrorPlus,fischerErrorMinus,fischerText,color,fischerSymbol)
+  embryoData.push( fischerTrace3 )
+  
+  //warner data
+  var warnerX = [24,48,72,96,120,144,168,192]
+
+  var warnerY = [{{ embryo_warner_24_3 }},
+    {{ embryo_warner_48_3 }},
+    {{ embryo_warner_72_3 }},
+    {{ embryo_warner_96_3 }},
+    {{ embryo_warner_120_3 }},
+    {{ embryo_warner_144_3 }},
+    {{ embryo_warner_168_3 }},
+    {{ embryo_warner_192_3 }}];
+
+  var warnerErrorPlus = [{{embryo_warner_se_24_3}},
+    {{embryo_warner_se_48_3}},
+    {{embryo_warner_se_72_3}},
+    {{embryo_warner_se_96_3}},
+    {{embryo_warner_se_120_3}},
+    {{embryo_warner_se_144_3}},
+    {{embryo_warner_se_168_3}},
+    {{embryo_warner_se_192_3}}];
+
+  var warnerErrorMinus = [{{embryo_warner_se_24_3}},
+    {{embryo_warner_se_48_3}},
+    {{embryo_warner_se_72_3}},
+    {{embryo_warner_se_96_3}},
+    {{embryo_warner_se_120_3}},
+    {{embryo_warner_se_144_3}},
+    {{embryo_warner_se_168_3}},
+    {{embryo_warner_se_192_3}}]
+   
+  var warnerText = makeEmbryoLabels('WARNER',warnerX,warnerY);
+  var warnerName = '';
+ 
+  var warnerTrace3 = makeEmbryoDotTrace(warnerX,warnerY,warnerName,warnerErrorPlus,warnerErrorMinus,warnerText,color,warnerSymbol)
+  embryoData.push( warnerTrace3 )
+  
+  //HELM data
+  var helmX = [2,7,12,24,120,240]
+
+  var helmY = [{{ embryo_helm_2_3 }},
+    {{ embryo_helm_7_3 }},
+    {{ embryo_helm_12_3 }},
+    {{ embryo_helm_24_3 }},
+    {{ embryo_helm_120_3 }},
+    {{ embryo_helm_240_3 }}];
+
+  var helmErrorPlus = [{{embryo_helm_se_2_3}},
+    {{embryo_helm_se_7_3}},
+    {{embryo_helm_se_12_3}},
+    {{embryo_helm_se_24_3}},
+    {{embryo_helm_se_120_3}},
+    {{embryo_helm_se_240_3}}];
+
+  var helmErrorMinus = [{{embryo_helm_se_2_3}},
+    {{embryo_helm_se_7_3}},
+    {{embryo_helm_se_12_3}},
+    {{embryo_helm_se_24_3}},
+    {{embryo_helm_se_120_3}},
+    {{embryo_helm_se_240_3}}]
+   
+  var helmText = makeEmbryoLabels('HELM',helmX,helmY);
+  var helmName = '';
+ 
+  var helmTrace3 = makeEmbryoDotTrace(helmX,helmY,helmName,helmErrorPlus,helmErrorMinus,helmText,color,helmSymbol)
+  embryoData.push( helmTrace3 )
+  
+{% endif %};
+{% if nvertx_4 %}
+  var color = 'rgb(214, 39, 40)'
+  
+  // Pull the data
+  var meanX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,48,72,96,120,144,168,192,240];
+  var meanY = [{{ embryo_mean_0_4 }}, 
+      {{ embryo_mean_1_4 }}, 
+      {{ embryo_mean_2_4 }},
+      {{ embryo_mean_3_4 }},
+      {{ embryo_mean_4_4 }},
+      {{ embryo_mean_5_4 }},
+      {{ embryo_mean_6_4 }},
+      {{ embryo_mean_7_4 }}, 
+      {{ embryo_mean_8_4 }},
+      {{ embryo_mean_9_4 }},
+      {{ embryo_mean_10_4 }},
+      {{ embryo_mean_11_4 }},
+      {{ embryo_mean_12_4 }},
+      {{ embryo_mean_13_4 }},
+      {{ embryo_mean_14_4 }},
+      {{ embryo_mean_15_4 }},
+      {{ embryo_mean_16_4 }},
+      {{ embryo_mean_17_4 }},
+      {{ embryo_mean_18_4 }},
+      {{ embryo_mean_19_4 }},
+      {{ embryo_mean_24_4 }},
+      {{ embryo_mean_48_4 }},
+      {{ embryo_mean_72_4 }},
+      {{ embryo_mean_96_4 }},
+      {{ embryo_mean_120_4 }},
+      {{ embryo_mean_144_4 }},
+      {{ embryo_mean_168_4 }},
+      {{ embryo_mean_192_4 }},
+      {{ embryo_mean_240_4 }}];
+  
+  //name trace
+  var meanName = '{{ nvertx_4 }}{% if not nvertx_4_annot_invalid %}<br>{{ nr_hit_graph_4 }}{% else %}<br>No annotations{% endif %}'
+    
+  var meanTrace4 = makeEmbryoMeanTrace(meanX,meanY,meanName,color);
+  
+  //add the mean data
+  embryoData.push( meanTrace4 )
+ 
+  //start with the Fischer data
+  var fischerX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+
+  var fischerY = [{{ embryo_fischer_0_4 }},
+    {{ embryo_fischer_1_4 }},
+    {{ embryo_fischer_2_4 }},
+    {{ embryo_fischer_3_4 }},
+    {{ embryo_fischer_4_4 }},
+    {{ embryo_fischer_5_4 }},
+    {{ embryo_fischer_6_4 }},
+    {{ embryo_fischer_7_4 }},
+    {{ embryo_fischer_8_4 }},
+    {{ embryo_fischer_9_4 }},
+    {{ embryo_fischer_10_4 }},
+    {{ embryo_fischer_11_4 }},
+    {{ embryo_fischer_12_4 }},
+    {{ embryo_fischer_13_4 }},
+    {{ embryo_fischer_14_4 }},
+    {{ embryo_fischer_15_4 }},
+    {{ embryo_fischer_16_4 }},
+    {{ embryo_fischer_17_4 }},
+    {{ embryo_fischer_18_4 }},
+    {{ embryo_fischer_19_4 }}];
+
+  var fischerErrorPlus = [{{embryo_fischer_se_0_4}},
+    {{embryo_fischer_se_1_4}},
+    {{embryo_fischer_se_2_4}},
+    {{embryo_fischer_se_3_4}},
+    {{embryo_fischer_se_4_4}},
+    {{embryo_fischer_se_5_4}},
+    {{embryo_fischer_se_6_4}},
+    {{embryo_fischer_se_7_4}},
+    {{embryo_fischer_se_8_4}},
+    {{embryo_fischer_se_9_4}},
+    ,
+    {{embryo_fischer_se_11_4}},
+    {{embryo_fischer_se_12_4}},
+    {{embryo_fischer_se_13_4}},
+    {{embryo_fischer_se_14_4}},
+    {{embryo_fischer_se_15_4}},
+    {{embryo_fischer_se_16_4}},
+    {{embryo_fischer_se_17_4}},
+    {{embryo_fischer_se_18_4}},
+    {{embryo_fischer_se_19_4}}];
+
+
+  var fischerErrorMinus = [{{embryo_fischer_se_0_4}},
+    {{embryo_fischer_se_1_4}},
+    {{embryo_fischer_se_2_4}},
+    {{embryo_fischer_se_3_4}},
+    {{embryo_fischer_se_4_4}},
+    {{embryo_fischer_se_5_4}},
+    {{embryo_fischer_se_6_4}},
+    {{embryo_fischer_se_7_4}},
+    {{embryo_fischer_se_8_4}},
+    {{embryo_fischer_se_9_4}},
+    ,
+    {{embryo_fischer_se_11_4}},
+    {{embryo_fischer_se_12_4}},
+    {{embryo_fischer_se_13_4}},
+    {{embryo_fischer_se_14_4}},
+    {{embryo_fischer_se_15_4}},
+    {{embryo_fischer_se_16_4}},
+    {{embryo_fischer_se_17_4}},
+    {{embryo_fischer_se_18_4}},
+    {{embryo_fischer_se_19_4}}]
+   
+  var fischerText = makeEmbryoLabels('FISCHER',fischerX,fischerY);
+  var fischerName = '';
+ 
+  var fischerTrace4 = makeEmbryoDotTrace(fischerX,fischerY,fischerName,fischerErrorPlus,fischerErrorMinus,fischerText,color,fischerSymbol)
+  embryoData.push( fischerTrace4 )
+  
+  //warner data
+  var warnerX = [24,48,72,96,120,144,168,192]
+
+  var warnerY = [{{ embryo_warner_24_4 }},
+    {{ embryo_warner_48_4 }},
+    {{ embryo_warner_72_4 }},
+    {{ embryo_warner_96_4 }},
+    {{ embryo_warner_120_4 }},
+    {{ embryo_warner_144_4 }},
+    {{ embryo_warner_168_4 }},
+    {{ embryo_warner_192_4 }}];
+
+  var warnerErrorPlus = [{{embryo_warner_se_24_4}},
+    {{embryo_warner_se_48_4}},
+    {{embryo_warner_se_72_4}},
+    {{embryo_warner_se_96_4}},
+    {{embryo_warner_se_120_4}},
+    {{embryo_warner_se_144_4}},
+    {{embryo_warner_se_168_4}},
+    {{embryo_warner_se_192_4}}];
+
+  var warnerErrorMinus = [{{embryo_warner_se_24_4}},
+    {{embryo_warner_se_48_4}},
+    {{embryo_warner_se_72_4}},
+    {{embryo_warner_se_96_4}},
+    {{embryo_warner_se_120_4}},
+    {{embryo_warner_se_144_4}},
+    {{embryo_warner_se_168_4}},
+    {{embryo_warner_se_192_4}}]
+   
+  var warnerText = makeEmbryoLabels('WARNER',warnerX,warnerY);
+  var warnerName = '';
+ 
+  var warnerTrace4 = makeEmbryoDotTrace(warnerX,warnerY,warnerName,warnerErrorPlus,warnerErrorMinus,warnerText,color,warnerSymbol)
+  embryoData.push( warnerTrace4 )
+  
+  //HELM data
+  var helmX = [2,7,12,24,120,240]
+
+  var helmY = [{{ embryo_helm_2_4 }},
+    {{ embryo_helm_7_4 }},
+    {{ embryo_helm_12_4 }},
+    {{ embryo_helm_24_4 }},
+    {{ embryo_helm_120_4 }},
+    {{ embryo_helm_240_4 }}];
+
+  var helmErrorPlus = [{{embryo_helm_se_2_4}},
+    {{embryo_helm_se_7_4}},
+    {{embryo_helm_se_12_4}},
+    {{embryo_helm_se_24_4}},
+    {{embryo_helm_se_120_4}},
+    {{embryo_helm_se_240_4}}];
+
+  var helmErrorMinus = [{{embryo_helm_se_2_4}},
+    {{embryo_helm_se_7_4}},
+    {{embryo_helm_se_12_4}},
+    {{embryo_helm_se_24_4}},
+    {{embryo_helm_se_120_4}},
+    {{embryo_helm_se_240_4}}]
+   
+  var helmText = makeEmbryoLabels('HELM',helmX,helmY);
+  var helmName = '';
+ 
+  var helmTrace4 = makeEmbryoDotTrace(helmX,helmY,helmName,helmErrorPlus,helmErrorMinus,helmText,color,helmSymbol)
+  embryoData.push( helmTrace4 )
+  
+{% endif %};
+{% if nvertx_5 %}
+  var color = 'rgb(148, 103, 189)'
+  
+  // Pull the data
+  var meanX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,48,72,96,120,144,168,192,240];
+  var meanY = [{{ embryo_mean_0_5 }}, 
+      {{ embryo_mean_1_5 }}, 
+      {{ embryo_mean_2_5 }},
+      {{ embryo_mean_3_5 }},
+      {{ embryo_mean_4_5 }},
+      {{ embryo_mean_5_5 }},
+      {{ embryo_mean_6_5 }},
+      {{ embryo_mean_7_5 }}, 
+      {{ embryo_mean_8_5 }},
+      {{ embryo_mean_9_5 }},
+      {{ embryo_mean_10_5 }},
+      {{ embryo_mean_11_5 }},
+      {{ embryo_mean_12_5 }},
+      {{ embryo_mean_13_5 }},
+      {{ embryo_mean_14_5 }},
+      {{ embryo_mean_15_5 }},
+      {{ embryo_mean_16_5 }},
+      {{ embryo_mean_17_5 }},
+      {{ embryo_mean_18_5 }},
+      {{ embryo_mean_19_5 }},
+      {{ embryo_mean_24_5 }},
+      {{ embryo_mean_48_5 }},
+      {{ embryo_mean_72_5 }},
+      {{ embryo_mean_96_5 }},
+      {{ embryo_mean_120_5 }},
+      {{ embryo_mean_144_5 }},
+      {{ embryo_mean_168_5 }},
+      {{ embryo_mean_192_5 }},
+      {{ embryo_mean_240_5 }}];
+  
+  //name trace
+  var meanName = '{{ nvertx_5 }}{% if not nvertx_5_annot_invalid %}<br>{{ nr_hit_graph_5 }}{% else %}<br>No annotations{% endif %}'
+    
+  var meanTrace5 = makeEmbryoMeanTrace(meanX,meanY,meanName,color);
+  
+  //add the mean data
+  embryoData.push( meanTrace5 )
+ 
+  //start with the Fischer data
+  var fischerX = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+
+  var fischerY = [{{ embryo_fischer_0_5 }},
+    {{ embryo_fischer_1_5 }},
+    {{ embryo_fischer_2_5 }},
+    {{ embryo_fischer_3_5 }},
+    {{ embryo_fischer_4_5 }},
+    {{ embryo_fischer_5_5 }},
+    {{ embryo_fischer_6_5 }},
+    {{ embryo_fischer_7_5 }},
+    {{ embryo_fischer_8_5 }},
+    {{ embryo_fischer_9_5 }},
+    {{ embryo_fischer_10_5 }},
+    {{ embryo_fischer_11_5 }},
+    {{ embryo_fischer_12_5 }},
+    {{ embryo_fischer_13_5 }},
+    {{ embryo_fischer_14_5 }},
+    {{ embryo_fischer_15_5 }},
+    {{ embryo_fischer_16_5 }},
+    {{ embryo_fischer_17_5 }},
+    {{ embryo_fischer_18_5 }},
+    {{ embryo_fischer_19_5 }}];
+
+  var fischerErrorPlus = [{{embryo_fischer_se_0_5}},
+    {{embryo_fischer_se_1_5}},
+    {{embryo_fischer_se_2_5}},
+    {{embryo_fischer_se_3_5}},
+    {{embryo_fischer_se_4_5}},
+    {{embryo_fischer_se_5_5}},
+    {{embryo_fischer_se_6_5}},
+    {{embryo_fischer_se_7_5}},
+    {{embryo_fischer_se_8_5}},
+    {{embryo_fischer_se_9_5}},
+    ,
+    {{embryo_fischer_se_11_5}},
+    {{embryo_fischer_se_12_5}},
+    {{embryo_fischer_se_13_5}},
+    {{embryo_fischer_se_14_5}},
+    {{embryo_fischer_se_15_4}},
+    {{embryo_fischer_se_16_5}},
+    {{embryo_fischer_se_17_5}},
+    {{embryo_fischer_se_18_5}},
+    {{embryo_fischer_se_19_5}}];
+
+
+  var fischerErrorMinus = [{{embryo_fischer_se_0_5}},
+    {{embryo_fischer_se_1_5}},
+    {{embryo_fischer_se_2_5}},
+    {{embryo_fischer_se_3_5}},
+    {{embryo_fischer_se_4_5}},
+    {{embryo_fischer_se_5_5}},
+    {{embryo_fischer_se_6_5}},
+    {{embryo_fischer_se_7_5}},
+    {{embryo_fischer_se_8_5}},
+    {{embryo_fischer_se_9_5}},
+    ,
+    {{embryo_fischer_se_11_5}},
+    {{embryo_fischer_se_12_5}},
+    {{embryo_fischer_se_13_5}},
+    {{embryo_fischer_se_14_5}},
+    {{embryo_fischer_se_15_5}},
+    {{embryo_fischer_se_16_5}},
+    {{embryo_fischer_se_17_5}},
+    {{embryo_fischer_se_18_5}},
+    {{embryo_fischer_se_19_5}}]
+   
+  var fischerText = makeEmbryoLabels('FISCHER',fischerX,fischerY);
+  var fischerName = '';
+ 
+  var fischerTrace5 = makeEmbryoDotTrace(fischerX,fischerY,fischerName,fischerErrorPlus,fischerErrorMinus,fischerText,color,fischerSymbol)
+  embryoData.push( fischerTrace5 )
+  
+  //warner data
+  var warnerX = [24,48,72,96,120,144,168,192]
+
+  var warnerY = [{{ embryo_warner_24_5 }},
+    {{ embryo_warner_48_5 }},
+    {{ embryo_warner_72_5 }},
+    {{ embryo_warner_96_5 }},
+    {{ embryo_warner_120_5 }},
+    {{ embryo_warner_144_5 }},
+    {{ embryo_warner_168_5 }},
+    {{ embryo_warner_192_5 }}];
+
+  var warnerErrorPlus = [{{embryo_warner_se_24_5}},
+    {{embryo_warner_se_48_5}},
+    {{embryo_warner_se_72_5}},
+    {{embryo_warner_se_96_5}},
+    {{embryo_warner_se_120_5}},
+    {{embryo_warner_se_144_5}},
+    {{embryo_warner_se_168_5}},
+    {{embryo_warner_se_192_5}}];
+
+  var warnerErrorMinus = [{{embryo_warner_se_24_5}},
+    {{embryo_warner_se_48_5}},
+    {{embryo_warner_se_72_5}},
+    {{embryo_warner_se_96_5}},
+    {{embryo_warner_se_120_5}},
+    {{embryo_warner_se_144_5},
+    {{embryo_warner_se_168_5}},
+    {{embryo_warner_se_192_5}}]
+   
+  var warnerText = makeEmbryoLabels('WARNER',warnerX,warnerY);
+  var warnerName = '';
+ 
+  var warnerTrace5 = makeEmbryoDotTrace(warnerX,warnerY,warnerName,warnerErrorPlus,warnerErrorMinus,warnerText,color,warnerSymbol)
+  embryoData.push( warnerTrace5 )
+  
+  //HELM data
+  var helmX = [2,7,12,24,120,240]
+
+  var helmY = [{{ embryo_helm_2_5 }},
+    {{ embryo_helm_7_5 }},
+    {{ embryo_helm_12_5 }},
+    {{ embryo_helm_24_5 }},
+    {{ embryo_helm_120_5 }},
+    {{ embryo_helm_240_5 }}];
+
+  var helmErrorPlus = [{{embryo_helm_se_2_5}},
+    {{embryo_helm_se_7_5}},
+    {{embryo_helm_se_12_5}},
+    {{embryo_helm_se_24_5}},
+    {{embryo_helm_se_120_5}},
+    {{embryo_helm_se_240_5}}];
+
+  var helmErrorMinus = [{{embryo_helm_se_2_5}},
+    {{embryo_helm_se_7_5}},
+    {{embryo_helm_se_12_5}},
+    {{embryo_helm_se_24_5}},
+    {{embryo_helm_se_120_5}},
+    {{embryo_helm_se_240_5}}]
+   
+  var helmText = makeEmbryoLabels('HELM',helmX,helmY);
+  var helmName = '';
+ 
+  var helmTrace5 = makeEmbryoDotTrace(helmX,helmY,helmName,helmErrorPlus,helmErrorMinus,helmText,color,helmSymbol)
+  embryoData.push( helmTrace5 )
+  
+{% endif %};
+
+var embryoContainer = document.getElementById( "embryoPlotWrapper" );
+
+var embryoLayout = {
+  title: 'Embryonic Expression',
+  xaxis: {
+    title: 'Hours post fertilization<br>■ Warner/ ▴ Helm / ● Fischer ',
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  yaxis: {
+    title: 'log2(counts per million + 1)',
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  width: embryoContainer.offsetWidth,
+  height: embryoContainer.offsetHeight,
+  hovermode:'closest'
+};
+
+Plotly.plot('embryoPlot', embryoData, embryoLayout, {
+  modeBarButtonsToRemove: ['toImage', 'select2d','sendDataToCloud','lasso2d','toggleSpikelines'],
+  modeBarButtonsToAdd: [{
+    name: 'Download',
+    icon: Plotly.Icons.camera,
+    click: function(gd) {
+      Plotly.downloadImage(gd)
+    }
+  }]
+})
+
 </script>
--->
 {% endblock js %}
 

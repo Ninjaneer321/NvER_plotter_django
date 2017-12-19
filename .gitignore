@@ -1,0 +1,6 @@
+nemVec_ER/db.sqlite3
+nemVec_ER/muscle3.8.31
+nemVec_ER/blast_db/*
+nemVec_ER/ER_plotter/migrations/*
+nemVec_ER/data_tables/*
+data_tables/

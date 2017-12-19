@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css_mfuzz4.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css/css_mfuzz4.css' %}" />
 {% endblock head %}
 
 
@@ -181,9 +181,10 @@ $("body").on("click", ".nvInput_checkboxes",function(){
   	}
 });
 </script>
+<!-- This block does the clickable rows-->
 <script type="text/javascript">
 $("body").on("click", ".clickable",function(){
-	$(this).next().toggle();
+	$(this).next().toggle('swing');
 });
 </script>
 {% endblock js %}
