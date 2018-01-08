@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.forms import formset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Regen_SE, Mfuzz, Regen_log_SE, Embryo_SE
-from .forms import Gene_searchForm, NvERTxForm, ConvertForm
+from ER_plotter.models import Fasta, Regen_cpm, Embryo_cpm, Annotation, Regen_SE, Mfuzz, Regen_log_SE, Embryo_SE, de_table
+from .forms import Gene_searchForm, NvERTxForm, ConvertForm, comparisonForm
 import math, re, diggPaginator
 import os
 import sys
@@ -14,6 +14,15 @@ from blastplus.settings import BLAST_CORRECT_PARAMS
 from blastplus.settings import EVALUE_BLAST_DEFAULT, BLAST_MAX_NUMBER_SEQ_IN_INPUT
 from blastplus.settings import EXAMPLE_FASTA_NUCL_FILE_PATH, EXAMPLE_FASTA_PROT_FILE_PATH
 from blastplus.settings import BLAST_DB_NUCL_LIST
+
+from django.db.models import Transform
+
+class AbsoluteValue(Transform):
+    lookup_name = 'abs'
+    function = 'ABS'
+    
+from django.db.models import IntegerField
+IntegerField.register_lookup(AbsoluteValue)
 
 def results(request):
 	regen_point = [0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]
@@ -1346,6 +1355,56 @@ def searchResults(request):
 	#	search_result = paginator.page(paginator.num_pages)
 #
 #	return render(request, 'ER_plotter/searchResults.html', locals())
+
+def volcano(request):
+	gene_search_form = Gene_searchForm(request.GET or None)
+	nvertx_form = NvERTxForm(request.POST or None)
+	convert_form = ConvertForm(request.POST or None)
+	
+	comparison_form = comparisonForm(request.GET or None)
+
+	comparison = False
+	
+	if comparison_form.is_valid():
+		comparison = comparison_form.cleaned_data['comparison']
+	
+	if comparison:
+		try:
+			#build up the comparison variables
+			pvalue = comparison + '_pvalue'
+			fc = comparison + '_logfc'
+			fdr = comparison + '_neglogfdr'
+			sig = comparison + '_sig'
+			
+			#this fetches the correct fields and outputs to tuples
+			de = de_table.objects.values_list('nvertx_id','Nemve1_tophit','Uniprot_Description','Top_nr_hit_eval',fc,pvalue,fdr,sig)
+
+			#the significance testing was done in R, the script making_DEtable.R
+			# the cutoff was ifelse(fischer_7_8$FDR <= 0.05 & abs(fischer_7_8$logFC) >= 2,'Y','N')
+			# this splits the data based on the significance test
+			sig_de = de.filter(**{ sig+'__iexact': 'Y'})
+			not_sig_de = de.filter(**{ sig+'__iexact': 'N'})
+			
+			#these two blocks extract the individual entries of the tuples and convert them to utf-8
+			sig_de_id = [x[0].encode("utf-8") for x in sig_de]
+			sig_de_nemve1 = [x[1] for x in sig_de]
+			sig_de_uprot = [x[2].encode("utf-8") for x in sig_de]
+			sig_de_nr = [x[3].encode("utf-8") for x in sig_de]
+			sig_de_fc = [x[4] for x in sig_de]
+			sig_de_pvalue = [x[5] for x in sig_de]
+			sig_de_fdr = [x[6] for x in sig_de]
+			
+			not_sig_de_id = [x[0].encode("utf-8") for x in not_sig_de]
+			not_sig_de_nemve1 = [x[1] for x in not_sig_de]
+			not_sig_de_uprot = [x[2].encode("utf-8") for x in not_sig_de]
+			not_sig_de_nr = [x[3].encode("utf-8") for x in not_sig_de]
+			not_sig_de_fc = [x[4] for x in not_sig_de]
+			not_sig_de_pvalue = [x[5] for x in not_sig_de]
+			not_sig_de_fdr = [x[6] for x in not_sig_de]
+
+		except :
+			pass
+	return render(request, 'ER_plotter/volcano.html', locals())
 
 def about(request):
 	gene_search_form = Gene_searchForm(request.GET or None)

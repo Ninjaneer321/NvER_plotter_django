@@ -30,6 +30,7 @@ First we install pip to make our life easier:
 sudo easy_install pip ;
 pip --version ;
 sudo pip install --upgrade pip
+
 ```
 Next we install the python packages
 ```
@@ -69,6 +70,7 @@ Install wgsi
 ```
 pip install apache2-mod_wsgi
 ```
+
 Edit the httpd file:
 ```
 cp /etc/apache2/httpd.conf /etc/apache2/httpd.bak
@@ -98,24 +100,43 @@ apachectl start
 ##
 ## modifying the database
 ## 
+##
 
+## Adding a table
 
+For example let's say you wanted to add a data table to the database called 'myNewTable'
+
+First you need to create the models in `models.py`  
+Then you need to add the fields to `DBfill.py`  
+Once that is done you can migrate by running:
+
+```
 python manage.py makemigrations ER_plotter
 python manage.py migrate
-
-## empty the database
-python manage.py flush
-rm db.sqlite3
-rm ER_plotter/migrations/*
-
-## repopulate
-python manage.py makemigrations ER_plotter
-python manage.py migrate
-
-## fill the database
+```
+Then to fill the database, for each new table run:  
+```
 python manage.py shell
 import DBfill
 DBfill.DBFill('fileName','table')
+```
+
+## empty the database
+This can be used if there is a catastrophic error in the database. Use with extreme caution:  
+
+```
+python manage.py flush
+rm db.sqlite3
+rm ER_plotter/migrations/*
+```
+
+## repopulate
+```
+python manage.py makemigrations ER_plotter
+python manage.py migrate
+```
 
 ## create admin
+```
 python manage.py createsuperuser
+```

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% extends "ER_plotter/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+
+<script src="{% static 'ER_plotter/js/plotly-latest.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css/home0424l.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css/css_mfuzz4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'ER_plotter/css/datatables.min.css' %}"/>
+
+{% endblock head %}
+
+{% block presentation_text %}
+<h2 class="sub-header delimiter"></h2>
+<h2 class="sub-header" id="Mfuzz_clusters">This isn't going to work. </h2>
+<div class="row"> 
+  <p class="text">Intra dataset Differential Expression (DE) testing was performed using <a href="http://bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR.</a> Each timepoint is comapred to t0, defined as 0hpa for regeneration, 7hpf (the estimated beginning of zygotic transcription) for the Fischer and Helm data, and 24hpf (the first timepoint sampled) for the Warner data.</p>
+  <p class="references">References for regeneration and novel embryonic datasets: <em class="em_blue">Warner et al(a), 2017, Warner et al(b), 2017.</em> Re-analyzed embryonic datasets: <a href = "https://www.ncbi.nlm.nih.gov/pubmed/24907201">Fischer et al. 2014</a>,<a href = "https://www.ncbi.nlm.nih.gov/pubmed/23731568">Tulin et al. 2013</a>,and <a href = "https://www.ncbi.nlm.nih.gov/pubmed/23601508">Helm et al. 2013</a></p>
+</div>
+{% endblock presentation_text %}
+{% block content %}
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<form class="volcanoForm" action="{% url 'volcano' %}" method="get">
+      <h3 class="NvERTxInput">Choose a comparison:</h3>
+      {% render_field comparison_form.comparison class+='form-control' %}<br/>
+      <input type="submit" class="btn btn-primary" value="Go!">
+    </form>
+    <div>
+      <h3>Volcano plot</h3>
+      <div class='volcanoPlotWrapper'>
+        <p>Use the chart plot tools to zoom, click, or select points.<br> 
+        The data will then show up in the table below.</p>
+        <div id='volcanoPlot'><!-- plotly volcano plot goes here--></div>
+      </div>
+    </div>
+    <div class='tableDiv'>
+	  <table id='clickTable' class="table table-striped" style='display:none'>
+	    <thead>
+		  <tr>
+		    <th>NvERTx.id</th>
+		    <th>nr top hit</th>
+			<th>log2(FC)</th>
+			<th>-log10(FDR)</th>
+		  </tr>
+		</thead>
+	    <tbody  id='dataFill'>
+	    </tbody>
+	  </table>
+  </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'ER_plotter/js/datatables.min.js' %}"></script>
+<script type="text/javascript">
+/*
+ *  make the volcano plot!
+ */
+ 
+ 
+var trace1, trace2, data;
+
+//This chunk cleans 'None' from the data which is output from the views filtering chunk
+var None = false;
+function cleanData(arr) {
+  return arr.filter(Boolean);
+}
+
+var myPlot = document.getElementById('volcanoPlot'),
+//significant datapoints
+  trace1 = {
+    x: {{ sig_de_fc }},
+    y: {{ sig_de_fdr }},
+    mode: 'markers',
+    type: 'scattergl',
+    name: 'Signigicant:<br>FC>2 & FDR < 0.05',
+    marker: {
+      color: 'rgb(230, 0, 230)',
+    },
+    text: {{ sig_de_id|safe }},
+    customdata: {{ sig_de_nr|safe }}
+  },
+
+  // not significant datapoints
+  trace2 = {
+    x: {{ not_sig_de_fc }},
+    y: {{ not_sig_de_fdr }},
+    mode: 'markers',
+    type: 'scattergl',
+    name : 'Not significant',
+    marker: {
+      color: 'rgb(73, 118, 208)',
+    },
+    text: {{ not_sig_de_id|safe }},
+    customdata: {{ not_sig_de_nr|safe }}
+  },
+
+  data = [trace1,trace2];
+    
+  layout = {
+  title: 'DE test results',
+  xaxis: {
+    title: 'log2(Fold Change)',
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  yaxis: {
+    title: '-log10(FDR)',
+    titlefont: {
+      family: 'Courier New, monospace',
+      size: 12,
+      color: '#7f7f7f'
+    }
+  },
+  showlegend: true
+  };
+
+Plotly.newPlot('volcanoPlot', data,layout, {
+  modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+  modeBarButtonsToAdd: [{
+    name: 'Download',
+    icon: Plotly.Icons.camera,
+    click: function(gd) {
+      Plotly.downloadImage(gd)
+    }
+  }]
+  })
+
+function generateTable(clickedText,clickedCustomdata,clickedXdata,clickedYdata) {
+  var tableHtml = '';
+  for(var row in clickedText) {
+    tableHtml += '<tr>\r\n';
+    tableHtml += '<td class="td_id "><input class="nvInput_checkboxes" type="checkbox" name="Nvid" value="'+clickedText[row]+'">'+clickedText[row]+'</td>';
+    tableHtml += '<td>'+clickedCustomdata[row]+'</td><td>'+clickedXdata[row]+'</td><td>'+clickedYdata[row]+'</td>';
+    tableHtml += '</tr>\r\n';
+  }
+      
+  document.getElementById("dataFill").innerHTML = tableHtml;
+  //$('#clickTable').DataTable();
+  document.getElementById("clickTable").style.display = 'block';
+  $('#clickTable').DataTable();
+}
+
+myPlot.on('plotly_click', function (d) {
+    var clickedText = [d.points[0].data.text[d.points[0].pointNumber]];
+    var clickedCustomdata = [d.points[0].data.customdata[d.points[0].pointNumber]];
+    var clickedXdata = [d.points[0].data.x[d.points[0].pointNumber]];
+    var clickedYdata = [d.points[0].data.y[d.points[0].pointNumber]];
+    generateTable(clickedText,clickedCustomdata,clickedXdata,clickedYdata)
+});
+
+myPlot.on('plotly_selected', function(eventData) {
+  var slecetedX = [];
+  var selectedY = [];
+  var selectedCustomdata = [];
+  var selectedText = [];
+  eventData.points.forEach(function(pt) {
+    slecetedX.push(pt.x);
+    selectedY.push(pt.y);
+    selectedCustomdata.push(pt.customdata);
+    selectedText.push(pt.text)
+  });
+  generateTable(selectedText,selectedCustomdata,slecetedX,selectedY)
+});
+
+</script>
+<script type="text/javascript">
+var elem = $(".nvid-form-control");
+
+$("body").on("click", ".nvInput_checkboxes",function(){
+	var val = $(this).val();
+    for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === val){
+    		elem[i].value = "";
+      	return;
+    	}
+  	}   
+  	for(var i = 0, len = elem.length; i < len; i++){
+  		if(elem[i].value === ""){
+    		elem[i].value = val;
+      	break;
+    	}
+  	}
+});
+</script>
+{% endblock js %}

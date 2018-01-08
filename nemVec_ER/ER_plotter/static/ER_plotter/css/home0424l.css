@@ -320,3 +320,11 @@ nav.shrink img{
     width: 85vw;
     height: 60vh;
 }
+
+/*
+ *  Volcano Plots
+ */
+
+.volcanoForm {
+  width: 500px;
+}
