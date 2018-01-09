@@ -57,18 +57,28 @@ def results(request):
 		nvertx_1 = nvertx_form.cleaned_data['nvertx_1']
 		if nvertx_1[0] != 'N' :
 			nvertx_1 = 'NvERTx.4.' + nvertx_1
+		if not re.match('NvERTx.4.[0-9]+$', nvertx_1):
+			nvertx_1 = 'NA'
 		nvertx_2 = nvertx_form.cleaned_data['nvertx_2']
 		if nvertx_2 and nvertx_2[0] != 'N' :
 			nvertx_2 = 'NvERTx.4.' + nvertx_2
+		if nvertx_2 and not re.match('NvERTx.4.[0-9]+$', nvertx_2):
+			nvertx_2 = 'NA'
 		nvertx_3 = nvertx_form.cleaned_data['nvertx_3']
 		if nvertx_3 and nvertx_3[0] != 'N' :
 			nvertx_3 = 'NvERTx.4.' + nvertx_3
+		if nvertx_3 and not re.match('NvERTx.4.[0-9]+$', nvertx_3):
+			nvertx_3 = 'NA'
 		nvertx_4 = nvertx_form.cleaned_data['nvertx_4']
 		if nvertx_4 and nvertx_4[0] != 'N' :
 			nvertx_4 = 'NvERTx.4.' + nvertx_4
+		if nvertx_4 and not re.match('NvERTx.4.[0-9]+$', nvertx_4):
+			nvertx_4 = 'NA'
 		nvertx_5 = nvertx_form.cleaned_data['nvertx_5']
 		if nvertx_5 and nvertx_5[0] != 'N' :
 			nvertx_5 = 'NvERTx.4.' + nvertx_5
+		if nvertx_5 and not re.match('NvERTx.4.[0-9]+$', nvertx_5):
+			nvertx_5 = 'NA'
 		log2 = nvertx_form.cleaned_data['log2']
 		nvertx_search = True
 		
