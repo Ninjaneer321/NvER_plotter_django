@@ -5,3 +5,4 @@ nemVec_ER/ER_plotter/migrations/*
 nemVec_ER/data_tables/*
 data_tables/
 nemVec_ER/db.sqlite3.pre_deTable.bak
+nemVec_ER/nemVec_ER/secret_key.py
