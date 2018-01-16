@@ -55,6 +55,7 @@
 {% block js %}
 <script type="text/javascript" src="{% static 'ER_plotter/js/datatables.min.js' %}"></script>
 <script type="text/javascript">
+
 /*
  *  make the volcano plot!
  */
@@ -97,8 +98,10 @@ var myPlot = document.getElementById('volcanoPlot'),
     customdata: {{ not_sig_de_nr|safe }}
   },
 
+  //add them for the plotly graph
   data = [trace1,trace2];
-    
+ 
+  // set up the plot layout   
   layout = {
   title: 'DE test results',
   xaxis: {
@@ -120,17 +123,21 @@ var myPlot = document.getElementById('volcanoPlot'),
   showlegend: true
   };
 
+//call the plotly function
 Plotly.newPlot('volcanoPlot', data,layout, {
   modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+  displayModeBar: true,
+  displaylogo: false,
   modeBarButtonsToAdd: [{
     name: 'Download',
     icon: Plotly.Icons.camera,
     click: function(gd) {
-      Plotly.downloadImage(gd)
+      Plotly.downloadImage(gd,{filename: 'Volcano_plot'})
     }
   }]
   })
 
+//this function generates a datatable on the fly with the click/ select data
 function generateTable(clickedText,clickedCustomdata,clickedXdata,clickedYdata) {
   var tableHtml = '';
   for(var row in clickedText) {
@@ -139,13 +146,14 @@ function generateTable(clickedText,clickedCustomdata,clickedXdata,clickedYdata) 
     tableHtml += '<td>'+clickedCustomdata[row]+'</td><td>'+clickedXdata[row]+'</td><td>'+clickedYdata[row]+'</td>';
     tableHtml += '</tr>\r\n';
   }
-      
+  
+  //display the datable and call js DataTable on it for the tools    
   document.getElementById("dataFill").innerHTML = tableHtml;
-  //$('#clickTable').DataTable();
   document.getElementById("clickTable").style.display = 'block';
   $('#clickTable').DataTable();
 }
 
+//get data and generate datatable on click
 myPlot.on('plotly_click', function (d) {
     var clickedText = [d.points[0].data.text[d.points[0].pointNumber]];
     var clickedCustomdata = [d.points[0].data.customdata[d.points[0].pointNumber]];
@@ -154,11 +162,17 @@ myPlot.on('plotly_click', function (d) {
     generateTable(clickedText,clickedCustomdata,clickedXdata,clickedYdata)
 });
 
+// get data and generate data on drag
 myPlot.on('plotly_selected', function(eventData) {
   var slecetedX = [];
   var selectedY = [];
   var selectedCustomdata = [];
   var selectedText = [];
+  // exit function if too many data are selected. prevents slowdowns
+  if (eventData.points.length > 200) {
+    alert("Please select fewer data points...");
+    return;
+  } ;
   eventData.points.forEach(function(pt) {
     slecetedX.push(pt.x);
     selectedY.push(pt.y);
@@ -171,7 +185,7 @@ myPlot.on('plotly_selected', function(eventData) {
 </script>
 <script type="text/javascript">
 var elem = $(".nvid-form-control");
-
+// fill in the nvertx form when checkboxes are clicked
 $("body").on("click", ".nvInput_checkboxes",function(){
 	var val = $(this).val();
     for(var i = 0, len = elem.length; i < len; i++){

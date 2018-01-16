@@ -855,13 +855,10 @@ var regenData = []
 // helper function to make the labels
 makeRegenLabels = function(x,y){
   var len = x.length;
-  var i = 0;
   var text = [];
-  for (; i < len; ) {
+  for (i = 0; i < len; i++) {
     var out = x[i] +'hpa <br>'+ y[i];
     text.push(out);
-    i++;
-
   }
   return text;
 }
@@ -1239,20 +1236,22 @@ var regenLayout = {
 };
 
 Plotly.plot('regenPlot', regenData, regenLayout, {
-  modeBarButtonsToRemove: ['toImage', 'sendDataToCloud','lasso2d','toggleSpikelines'],
+  modeBarButtonsToRemove: ['toImage', 'select2d', 'sendDataToCloud','lasso2d','toggleSpikelines'],
+  displayModeBar: true,
+  displaylogo: false,
   modeBarButtonsToAdd: [{
     name: 'Download',
     icon: Plotly.Icons.camera,
     click: function(gd) {
-      Plotly.downloadImage(gd)
+      Plotly.downloadImage(gd,{filename: 'Embryo_plot'})
     }
   }]
 })
 
 /*
-
-  EMBRYO PLOT
-
+ *
+ * EMBRYO PLOT
+ *
 */
 
 var embryoData = [];
@@ -1309,13 +1308,10 @@ makeEmbryoDotTrace = function(x,y,name,errorPlus,errorMinus,text,color,symbol){
 
 makeEmbryoLabels = function(dataset,X,Y){
   var len = x.length;
-  var i = 0;
   var text = [];
-  for (; i < len; ) {
+  for (i = 0; i < len; i++ ) {
     var out = dataset+' '+ X[i] +'hpf <br>'+ Y[i];
     text.push(out);
-    i++;
-
   }
   return text;
 }
@@ -2238,6 +2234,7 @@ makeEmbryoLabels = function(dataset,X,Y){
   
 {% endif %};
 
+// this uses the sixe of the div to make the plot the correct size
 var embryoContainer = document.getElementById( "embryoPlotWrapper" );
 
 var embryoLayout = {
@@ -2263,13 +2260,16 @@ var embryoLayout = {
   hovermode:'closest'
 };
 
+// call plotly
 Plotly.plot('embryoPlot', embryoData, embryoLayout, {
   modeBarButtonsToRemove: ['toImage', 'select2d','sendDataToCloud','lasso2d','toggleSpikelines'],
+  displayModeBar: true,
+  displaylogo: false,
   modeBarButtonsToAdd: [{
     name: 'Download',
     icon: Plotly.Icons.camera,
     click: function(gd) {
-      Plotly.downloadImage(gd)
+      Plotly.downloadImage(gd,{filename: 'Embryo_plot'})
     }
   }]
 })
