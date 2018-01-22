@@ -52,8 +52,8 @@
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'mfuzz' %}">Co-Expression Clusters</a></li>
             <li><a href="http://www.kahikai.org/"><img src="{% static 'ER_plotter/img/logo_cropped.png' %}" width='70px'></a></li>
             <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'blast' %}">BLAST</a></li>
-            <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'about' %}">About</a></li>
-            <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'faq' %}">FAQ - Cite</a></li>
+            <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'volcano' %}">DE Genes</a></li>
+            <li><a class="navbar_links" class="page-scroll hide-m" href="{% url 'about' %}">About/ FAQ</a></li>
           </ul>
         </div>
       </div>
@@ -98,7 +98,7 @@
           {% render_field nvertx_form.nvertx_5 class+='nvid-form-control' placeholder='eg : NvERTx.4.100046' %}
             <div class="checkbox">
               <label>
-                {{ nvertx_form.log2 }} Check for CPM (Counts per million)
+                {{ nvertx_form.log2 }} Check for CPM (Regen only)
               </label>
             </div>
             <input type="submit" class="btn btn-primary" value="Plot!" id="primaryButton" onclick="ExistingLogic()" />
