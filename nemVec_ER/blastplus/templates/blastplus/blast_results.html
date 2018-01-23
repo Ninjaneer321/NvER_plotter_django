@@ -36,8 +36,7 @@
     <br>
     <h4><b>Description</b></h4>
 
-    <form action="{% url 'results' %}" method="get">
-    <input type="submit" value="Compare !">
+    <input type="submit" value="Compare !" id="secondaryButton" onclick="document.getElementById('primaryButton').click()">
     <div class="nbsite_boxstyle">
         <table class="table table-hover table-condensed">
             <thead>
@@ -57,7 +56,7 @@
             {% for br in blast_records %}
             {% for alignment in br.alignments %}
             <tr>
-                <td class='td_id'><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ alignment.hit_def }}">{{ alignment.hit_def }}</td>
+                <td class='td_id '><input class='nvInput_checkboxes' type="checkbox" name="Nvid" value="{{ alignment.hit_def }}">{{ alignment.hit_def }}</td>
                 <td>{{ br.query }}</td>
                 <td>{{ alignment.length }}</td>
                 <td>{{ alignment.best_evalue }}
@@ -71,8 +70,7 @@
             </tbody>
         </table>
     </div>
-    <input type="submit" value="Compare !">
-    </form>
+    <input type="submit" value="Compare !" id="secondaryButton" onclick="document.getElementById('primaryButton').click()">
 
     <br><br>
     <h4><b>Alignments</b></h4>
@@ -163,21 +161,11 @@
 {% endblock content %}
 
 {% block js %}
-<script type="text/javascript">
-jQuery(function(){
-    var max = 5;
-    var checkboxes = $('input[class="nvInput_checkboxes"]');
-
-    checkboxes.change(function(){
-        var current = checkboxes.filter(':checked').length;
-        checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-    });
-});
-</script>
+<!-- This block fills the form on clicking the checkboxes-->
 <script type="text/javascript">
 var elem = $(".nvid-form-control");
 
-$(".nvInput_checkboxes").click(function(){
+$("body").on("click", ".nvInput_checkboxes",function(){
 	var val = $(this).val();
     for(var i = 0, len = elem.length; i < len; i++){
   		if(elem[i].value === val){

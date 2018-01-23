@@ -15,6 +15,7 @@ from blastplus.settings import EVALUE_BLAST_DEFAULT, BLAST_MAX_NUMBER_SEQ_IN_INP
 from blastplus.settings import EXAMPLE_FASTA_NUCL_FILE_PATH, EXAMPLE_FASTA_PROT_FILE_PATH
 from blastplus.settings import BLAST_DB_NUCL_LIST
 from django.db.models import Transform
+from django.http import JsonResponse
 
 '''
 views.py, part of the nemvecER/ER_plotter module of NvERTx.
@@ -530,3 +531,24 @@ def faq(request):
 	convert_form = ConvertForm(request.POST or None)
 	
 	return render(request, 'ER_plotter/faq.html', locals())
+	
+def api(request):
+	query = request.META['QUERY_STRING']
+	api_out = {}
+	if not query == '':
+		if query[0] != 'N' :
+			query = 'NvERTx.4.' + query
+		if not re.match('NvERTx.4.[0-9]+$', query):
+			query = 'NA'
+		log2 = True
+		api_results = nvertx_results(query,log2)
+		api_out['nvertx_id'] = query
+		api_out['regen']= [['counts',api_results.counts['regen']],['error',api_results.counts['regen_se']],['time.hpa',[-1,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]]]
+		api_out['embryo_warner']= [['counts',api_results.counts['embryo_warner']],['error',api_results.counts['embryo_warner_se']],['time.hpf',[24,48,72,96,120,144,168,192]]]
+		api_out['embryo_helm']= [['counts',api_results.counts['embryo_helm']],['error',api_results.counts['embryo_helm_se']],['time.hpf',[2,7,12,24,120,240]]]	
+		api_out['embryo_fischer']= [['counts',api_results.counts['embryo_fischer']],['error',api_results.counts['embryo_fischer_se']],['time.hpf',[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]]]
+	
+		return JsonResponse(api_out)
+	else :
+		api_out['sorry'] = 'no query... add: ?NvERTx.4.100038 or another number to the url query api'
+		return JsonResponse(api_out)

@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^faq$', views.faq, name='faq'),
     url(r'^volcano$', views.volcano, name='volcano'),
     url(r'^volcano/(?P<comparison>\w+_[0-9]+_[0-9]+)$', views.volcano, name='volcano'),
+    url(r'^API$', views.api, name='api'),
 ]
