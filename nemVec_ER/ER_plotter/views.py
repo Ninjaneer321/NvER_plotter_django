@@ -533,6 +533,7 @@ def faq(request):
 	return render(request, 'ER_plotter/faq.html', locals())
 	
 def api(request):
+	#get the query tag from the url
 	query = request.META['QUERY_STRING']
 	api_out = {}
 	if not query == '':
@@ -541,14 +542,33 @@ def api(request):
 		if not re.match('NvERTx.4.[0-9]+$', query):
 			query = 'NA'
 		log2 = True
+		
+		#query the db
 		api_results = nvertx_results(query,log2)
+		
+		#build up the dictionaries for the response
+		#these will be converted to json
 		api_out['nvertx_id'] = query
 		api_out['regen']= [['counts',api_results.counts['regen']],['error',api_results.counts['regen_se']],['time.hpa',[-1,0,2,4,8,12,16,20,24,36,48,60,72,96,120,144]]]
 		api_out['embryo_warner']= [['counts',api_results.counts['embryo_warner']],['error',api_results.counts['embryo_warner_se']],['time.hpf',[24,48,72,96,120,144,168,192]]]
 		api_out['embryo_helm']= [['counts',api_results.counts['embryo_helm']],['error',api_results.counts['embryo_helm_se']],['time.hpf',[2,7,12,24,120,240]]]	
 		api_out['embryo_fischer']= [['counts',api_results.counts['embryo_fischer']],['error',api_results.counts['embryo_fischer_se']],['time.hpf',[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]]]
+
+		#This block enables COR on the response
+		response = JsonResponse(api_out)
+		response["Access-Control-Allow-Origin"] = "*"
+		response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+		response["Access-Control-Max-Age"] = "1000"
+		response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
+		return response
 	
-		return JsonResponse(api_out)
+	#error if there is no query	
 	else :
 		api_out['sorry'] = 'no query... add: ?NvERTx.4.100038 or another number to the url query api'
-		return JsonResponse(api_out)
+		
+		response = JsonResponse(api_out)
+		response["Access-Control-Allow-Origin"] = "*"
+		response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+		response["Access-Control-Max-Age"] = "1000"
+		response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
+		return response
